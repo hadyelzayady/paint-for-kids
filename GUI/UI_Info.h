@@ -20,7 +20,7 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 	ITM_RECT,		//Recangle item in menu
 	ITM_CIRC,		//Circle item in menu
 	ITM_TRI,
-	//ITM_LINE,
+	ITM_LINE,
 	//TODO: Add more items names here
 
 	ITM_EXIT,		//Exit item

@@ -83,6 +83,7 @@ void Output::CreateDrawToolBar() const
 	MenuItemImages[ITM_RECT] = "images\\MenuItems\\Menu_Rect.jpg";
 	MenuItemImages[ITM_CIRC] = "images\\MenuItems\\Menu_Circ.jpg";
 	MenuItemImages[ITM_TRI] = "images\\MenuItems\\Menu_Tri.jpg";
+	MenuItemImages[ITM_LINE] = "images\\MenuItems\\Menu_Line.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\MenuItems\\Menu_Exit.jpg";
 
 	//TODO: Prepare images for each menu item and add it to the list
@@ -186,6 +187,29 @@ void Output::DrawTri(Point P1, Point P2,Point P3, GfxInfo TriGfxInfo, bool selec
 
 
 	pWind->DrawTriangle(P1.x,P1.y, P2.x, P2.y,P3.x,P3.y,style);
+
+}
+void Output::DrawLine(Point P1, Point P2, GfxInfo LineGfxInfo, bool selected) const // Draw Line
+{
+	color DrawingClr;
+	if (selected)
+		DrawingClr = UI.HighlightColor; //Figure should be drawn highlighted
+	else
+		DrawingClr = LineGfxInfo.DrawClr;
+
+	pWind->SetPen(DrawingClr, LineGfxInfo.BorderWdth);	//Set Drawing color & width
+
+	drawstyle style;
+	if (LineGfxInfo.isFilled)
+	{
+		style = FILLED;
+		pWind->SetBrush(LineGfxInfo.FillClr);
+	}
+	else
+		style = FRAME;
+
+
+	pWind->DrawLine(P1.x, P1.y, P2.x, P2.y,style);
 
 }
 //////////////////////////////////////////////////////////////////////////////////////////

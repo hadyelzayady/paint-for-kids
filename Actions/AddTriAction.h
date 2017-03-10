@@ -8,7 +8,7 @@ private:
 public:
 	AddTriAction(ApplicationManager* pApp);
 
-	//Reads rectangle parameters
+	//Reads Line parameters
 	virtual void ReadActionParameters();
 
 	//Add rectangle to the ApplicationManager
