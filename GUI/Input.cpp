@@ -54,6 +54,7 @@ ActionType Input::GetUserAction() const
 			case ITM_CIRC: return DRAW_CIRC;
 			case ITM_TRI:  return DRAW_TRI;
 			case ITM_LINE: return DRAW_LINE;
+			case ITM_FILLCOLOR: return CHNG_FILL_CLR;
 			case ITM_EXIT: return EXIT;
 			default: return EMPTY;	//A click on empty place in desgin toolbar
 			}

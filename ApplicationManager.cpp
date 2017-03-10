@@ -2,7 +2,7 @@
 #include "Actions\AddRectAction.h"
 #include "Actions\AddTriAction.h"
 #include "Actions\AddLineAction.h"
-
+#include "Actions\ChangeFillColor.h"
 //Constructor
 ApplicationManager::ApplicationManager()
 {
@@ -48,7 +48,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case DRAW_LINE:
 			pAct = new AddLineAction(this);
 			break;
-
+		case CHNG_FILL_CLR:
+			pAct = new ChangeFillColor(this);
+			break;
 		case EXIT:
 			///create ExitAction here
 			
