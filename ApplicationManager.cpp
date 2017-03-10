@@ -4,6 +4,7 @@
 #include "Actions\AddLineAction.h"
 #include "Actions\ChangeFillColor.h"
 #include "Actions\ChangeDrawColor.h"
+#include "Actions\ChangeBKColor.h"
 //Constructor
 ApplicationManager::ApplicationManager()
 {
@@ -54,6 +55,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			break;
 		case CHNG_DRAW_CLR:
 			pAct = new ChangeDrawColor(this);
+			break;
+		case CHNG_BK_CLR:
+			pAct = new ChangeBKColor(this);
 			break;
 		case EXIT:
 			///create ExitAction here

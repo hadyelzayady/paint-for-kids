@@ -11,6 +11,11 @@ void ChangeFillColor::ReadActionParameters()
 
 void ChangeFillColor::Execute()
 {
-	colorsWin.Execute();
-	UI.FillColor = colorsWin.getcolor();
+	colorsWin.DrawRect();
+	bool isselected = colorsWin.selectColor();
+	colorsWin.closeRect();
+	if (!isselected)
+		return;
+	UI.FillColor =colorsWin.getcolor() ;
+	colorsWin.closeRect();
 }

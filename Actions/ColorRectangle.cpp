@@ -14,10 +14,11 @@ void ColorRectangle::ReadActionParameters()
 	pManager->GetInput()->GetPointClicked(x, y);
 	return;
 }
-color ColorRectangle::getcolor()const {
-	return chosenColor;
+color ColorRectangle::getcolor() const
+{
+	return chosencolor;
 }
-void  ColorRectangle::selectColor()
+bool  ColorRectangle::selectColor()
 {
 	ReadActionParameters();
 	if (x < P2.x && x > P1.x && y > UI.ToolBarHeight && y < P2.y) //if clicked outside option rect ,then remove this rect
@@ -25,11 +26,11 @@ void  ColorRectangle::selectColor()
 		int indexI = (x - P1.x) / (width + 1);// git distance from corner1 then divide it by width of colorRec+1 ; 1 because-> margin; -1 ->arr indexed from 0
 		int indexJ = (y - P1.y) / (height + 1);
 		int index = indexI + 8 * indexJ;// 8 color per row
-		chosenColor= colors[index];
-		return;
+		chosencolor=colors[index];
+		return true;
 	}
-	chosenColor = UI.FillColor;
-	return;
+	
+	return false;
 }
 void ColorRectangle::DrawRect() const
 {
@@ -67,7 +68,4 @@ void ColorRectangle::closeRect() const
 }
 void ColorRectangle::Execute()
 {
-	DrawRect();
-	selectColor();
-	closeRect();
 }

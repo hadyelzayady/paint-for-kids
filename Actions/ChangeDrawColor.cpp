@@ -11,6 +11,10 @@ void ChangeDrawColor::ReadActionParameters()
 
 void ChangeDrawColor::Execute()
 {
-	colorsWin.Execute();
-	UI.DrawColor = colorsWin.getcolor();
+	colorsWin.DrawRect();
+	bool isselected = colorsWin.selectColor();
+	colorsWin.closeRect();
+	if (!isselected)
+		return;
+	UI.DrawColor = colorsWin.getcolor() ;
 }
