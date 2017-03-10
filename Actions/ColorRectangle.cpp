@@ -2,16 +2,16 @@
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 #include "ColorRectangle.h"
-ColorRectangle::ColorRectangle(ApplicationManager*pApp,Point P1) :Action(pApp)
+ColorRectangle::ColorRectangle(ApplicationManager*pApp,int x) :Action(pApp)
 {
-	this->P1 = P1;
+	this->P1.x = x;
+	this->P1.y = 54;
 	this->P2.x = P1.x+8*(width+1)-1;// 8 squares in row ,each square with width+margin 1 except last square
 	this->P2.y = P1.y + 18 * (height + 1) - 1;
 }
 void ColorRectangle::ReadActionParameters()
 {
 	pManager->GetInput()->GetPointClicked(x, y);
-	selectColor();
 	return;
 }
 color ColorRectangle::getcolor()const {
@@ -19,7 +19,7 @@ color ColorRectangle::getcolor()const {
 }
 void  ColorRectangle::selectColor()
 {
-
+	ReadActionParameters();
 	if (x < P2.x && x > P1.x && y > UI.ToolBarHeight && y < P2.y) //if clicked outside option rect ,then remove this rect
 	{
 		int indexI = (x - P1.x) / (width + 1);// git distance from corner1 then divide it by width of colorRec+1 ; 1 because-> margin; -1 ->arr indexed from 0
@@ -68,6 +68,6 @@ void ColorRectangle::closeRect() const
 void ColorRectangle::Execute()
 {
 	DrawRect();
-	ReadActionParameters();
+	selectColor();
 	closeRect();
 }
