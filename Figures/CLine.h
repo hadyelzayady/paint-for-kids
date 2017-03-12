@@ -10,6 +10,7 @@ private:
 	Point End;
 public:
 	CLine(Point, Point, GfxInfo FigureGfxInfo);
+	virtual bool isPointInFigure(int x, int y)const;
 	virtual void Draw(Output* pOut) const;
 };
 

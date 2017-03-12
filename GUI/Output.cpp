@@ -24,7 +24,6 @@ Output::Output()
 	UI.StatusBarColor = TURQUOISE;
 	UI.PenWidth = 3;	//width of the figures frames
 
-	
 	//Create the output window
 	pWind = CreateWind(UI.width, UI.height, UI.wx, UI.wy);
 	//Change the title
@@ -87,6 +86,7 @@ void Output::CreateDrawToolBar() const
 	MenuItemImages[ITM_FILLCOLOR] = "images\\MenuItems\\Menu_Fill.jpg";
 	MenuItemImages[ITM_DRAWCOLOR] = "images\\MenuItems\\Menu_Draw.jpg";
 	MenuItemImages[ITM_BGRCOLOR] = "images\\MenuItems\\Menu_BKColor.jpg";
+	MenuItemImages[ITM_SELECT] = "images\\MenuItems\\Menu_Select.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\MenuItems\\Menu_Exit.jpg";
 
 	//TODO: Prepare images for each menu item and add it to the list
@@ -126,6 +126,14 @@ void Output::PrintMessage(string msg) const	//Prints a message on status bar
 	pWind->SetPen(UI.MsgColor, 50);
 	pWind->SetFont(20, BOLD , BY_NAME, "Arial");   
 	pWind->DrawString(10, UI.height - (int)(UI.StatusBarHeight/1.5), msg);
+}
+void Output::PrintNumber(int N)const
+{
+	ClearStatusBar();	//First clear the status bar
+
+	pWind->SetPen(UI.MsgColor, 50);
+	pWind->SetFont(20, BOLD, BY_NAME, "Arial");
+	pWind->DrawInteger(5, UI.height - UI.StatusBarHeight+7, N);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 

@@ -11,7 +11,6 @@ protected:
 	int ID;		//Each figure has an ID
 	bool Selected;	//true if the figure is selected.
 	GfxInfo FigGfxInfo;	//Figure graphis info
-	
 	/// Add more parameters if needed.
 
 public:
@@ -20,7 +19,7 @@ public:
 	bool IsSelected() const;	//check whether fig is selected
 
 	virtual void Draw(Output* pOut) const  = 0 ;		//Draw the figure
-	
+	virtual bool isPointInFigure(int x, int y)const=0;
 	void ChngDrawClr(color Dclr);	//changes the figure's drawing color
 	void ChngFillClr(color Fclr);	//changes the figure's filling color
 

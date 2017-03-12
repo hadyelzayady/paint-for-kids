@@ -57,6 +57,7 @@ ActionType Input::GetUserAction() const
 			case ITM_FILLCOLOR: return CHNG_FILL_CLR;
 			case ITM_DRAWCOLOR: return CHNG_DRAW_CLR;
 			case ITM_BGRCOLOR: return CHNG_BK_CLR;
+			case ITM_SELECT: return SELECT;
 			case ITM_EXIT: return EXIT;
 			default: return EMPTY;	//A click on empty place in desgin toolbar
 			}

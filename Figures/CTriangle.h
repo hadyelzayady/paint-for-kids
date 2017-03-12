@@ -11,4 +11,5 @@ private:
 public:
 	CTriangle(Point, Point,Point, GfxInfo FigureGfxInfo);
 	virtual void Draw(Output* pOut) const;
+	virtual bool isPointInFigure(int x, int y)const;
 };

@@ -5,6 +5,7 @@
 #include "Actions\ChangeFillColor.h"
 #include "Actions\ChangeDrawColor.h"
 #include "Actions\ChangeBKColor.h"
+#include "Actions\SelectAction.h"
 //Constructor
 ApplicationManager::ApplicationManager()
 {
@@ -59,6 +60,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case CHNG_BK_CLR:
 			pAct = new ChangeBKColor(this);
 			break;
+		case SELECT:
+			pAct = new SelectAction(this);
+			break;
 		case EXIT:
 			///create ExitAction here
 			
@@ -91,7 +95,11 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const
 {
 	//If a figure is found return a pointer to it.
 	//if this point (x,y) does not belong to any figure return NULL
-
+	for (size_t i = 0; i < FigCount; i++)
+	{
+		if (FigList[i]->isPointInFigure(x, y))
+			return FigList[i];
+	}
 
 	///Add your code here to search for a figure given a point x,y	
 

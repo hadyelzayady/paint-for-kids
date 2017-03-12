@@ -12,3 +12,9 @@ void CLine::Draw(Output* pOut) const
 	//Call Output::DrawLine to draw a Line on the screen	
 	pOut->DrawLine(Start, End, FigGfxInfo, Selected);
 }
+bool CLine::isPointInFigure(int x, int y)const
+{
+	float slope = (float)(Start.y - End.y) / (float)(Start.x - End.x);// line eq y=ax+b ;a->slope, b
+	float b =Start.y - slope*Start.x;// substitute by point on line to get b
+	return y==(int)(slope*x+b);
+}

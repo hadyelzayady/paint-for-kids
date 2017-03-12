@@ -13,7 +13,6 @@ protected:
 	ApplicationManager *pManager;	//Actions needs AppMngr to do their job
 
 public:
-
 	Action(ApplicationManager *pApp) { pManager = pApp; }	//constructor
 
 	//Reads parameters required for action to execute (code depends on action type)
@@ -29,5 +28,4 @@ public:
 	//virtual void Redo()=0;
 
 };
-
 #endif
