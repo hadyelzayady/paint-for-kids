@@ -5,7 +5,6 @@
 #include "Figures\CFigure.h"
 #include "GUI\input.h"
 #include "GUI\output.h"
-
 //Main class that manages everything in the application.
 class ApplicationManager
 {
@@ -14,7 +13,6 @@ class ApplicationManager
 private:
 	int FigCount;		//Actual number of figures
 	CFigure* FigList[MaxFigCount];	//List of all figures (Array of pointers)
-
 	//Pointers to Input and Output classes
 	Input *pIn;
 	Output *pOut;
@@ -22,7 +20,15 @@ private:
 public:	
 	ApplicationManager(); 
 	~ApplicationManager();
-	
+	int getFigCount()const
+	{
+		return FigCount;
+	}
+	CFigure** getFigList()
+	{
+		return FigList;
+	}
+	void unselectAll() const; // clicks on empty drawing area -> unselecct all
 	// -- Action-Related Functions
 	//Reads the input command from the user and returns the corresponding action type
 	ActionType GetUserAction() const;

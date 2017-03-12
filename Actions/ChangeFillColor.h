@@ -12,6 +12,7 @@ public:
 
 	//Add Line to the ApplicationManager
 	virtual void Execute();
+	void changeAllSelected()const;
 	~ChangeFillColor();
 };
 

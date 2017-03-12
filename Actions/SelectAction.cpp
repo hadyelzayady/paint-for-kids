@@ -21,29 +21,32 @@ void SelectAction::ReadActionParameters()
 		pIn->GetPointClicked(x, y);
 		if (y < UI.ToolBarHeight)// user clicks on icons to make action on selected figures ;selected figures still selected
 			return;
-
 		CFigure* selectedFig = pManager->GetFigure(x, y);
-		if (selectedFig != NULL)// if clicks on empty space on drawing area ->unselect all
+		if (selectedFig == NULL)// if clicks on empty space on drawing area ->unselect all
+			return;
+		bool Selected = selectedFig->IsSelected();
+		selectedFig->SetSelected(!Selected);
+		selectedFig->Draw(pOut);
+		if (Selected)// it is now unselected as selected has the prev state
 		{
-			bool Selected = selectedFig->IsSelected();
-			selectedFig->SetSelected(!Selected);
-			selectedFig->Draw(pOut);
-			if (Selected)// it is now unselected as selected has the prev state
-				numOfSelected--;
-			else
-				numOfSelected++;
-			if (numOfSelected == 1)
-			{
+			numOfSelected--;
 
-			}
-			else
+		}
+		else// it is now selected
+		{
+			numOfSelected++;
+		}
+		if (numOfSelected == 1)
+		{
+			// print fig info
+		}
+		else
 				pOut->PrintNumber(numOfSelected);
 		}
 
 
 	}
 
-}
 
 //Execute the action
 void SelectAction::Execute()

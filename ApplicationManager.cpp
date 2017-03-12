@@ -39,17 +39,19 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	{
 		case DRAW_RECT:
 			pAct = new AddRectAction(this);
+			unselectAll();// unselect all selected figures
 			break;
-
 		case DRAW_CIRC:
 
 			break;
 		case DRAW_TRI:
 			pAct = new AddTriAction(this);
+			unselectAll();// unselect all selected figures
 			break;
 
 		case DRAW_LINE:
 			pAct = new AddLineAction(this);
+			unselectAll();// unselect all selected figures
 			break;
 		case CHNG_FILL_CLR:
 			pAct = new ChangeFillColor(this);
@@ -67,7 +69,8 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			///create ExitAction here
 			
 			break;
-		
+		default:
+			unselectAll();// unselect all selected figures
 		case STATUS:	//a click on the status bar ==> no action
 			return;
 	}
@@ -83,7 +86,15 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 //==================================================================================//
 //						Figures Management Functions								//
 //==================================================================================//
-
+void ApplicationManager::unselectAll() const // clicks on empty drawing area -> unselecct all
+{
+	SelectAction::numOfSelected = 0;
+	pOut->PrintMessage("All Unselected");
+	for (size_t i = 0; i < FigCount; i++)
+	{
+		FigList[i]->SetSelected(false);
+	}
+}
 //Add a figure to the list of figures
 void ApplicationManager::AddFigure(CFigure* pFig)
 {
