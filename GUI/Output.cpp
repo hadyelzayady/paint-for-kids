@@ -148,6 +148,11 @@ color Output::getCrntFillColor() const	//get current filling color
 int Output::getCrntPenWidth() const		//get current pen width
 {	return UI.PenWidth;	}
 
+void Output::drawImg(int x, int y,int width,int height) const
+{
+	pWind->DrawImage("images\\MenuItems\\colorsPallete.jpg", x, y, width, height);
+}
+
 //======================================================================================//
 //								Figures Drawing Functions								//
 //======================================================================================//

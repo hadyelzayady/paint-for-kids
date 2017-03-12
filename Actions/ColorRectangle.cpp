@@ -42,20 +42,10 @@ void ColorRectangle::DrawRect() const
 	Point tempP1 = P1;// to keep the values of p1,p1
 	Point tempP2 = P2;
 	int k = 0;//index of color in the array
-	for (size_t i = 0; i < 18; i++)//draw rectangles with colors 8 colors per row ,18 row
-	{
-		tempP2.y = tempP1.y + height;
-		for (size_t j = 0; j < 8; j++)
-		{
-			tempP2.x = tempP1.x + width; // corner2 of color rect
-			RectGfxInfo.FillClr = colors[k];
-			k++;
-			pOut->DrawRect(tempP1, tempP2, RectGfxInfo);
-			tempP1.x = tempP2.x + 1;// x of next color rect make margin of 1 px
-		}
-		tempP1.y = tempP2.y + 1;//y1 of next rect ,margin=1px
-		tempP1.x = P1.x; // start the next row from original x
-	}
+	int w, h;
+	w = P2.x - P1.x;
+	h = P2.y - P1.y;
+	pOut->drawImg(P1.x, P1.y,w,h);
 }
 void ColorRectangle::closeRect() const
 { 

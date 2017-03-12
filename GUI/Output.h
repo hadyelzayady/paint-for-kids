@@ -23,7 +23,7 @@ public:
 	void DrawTri(Point P1, Point P2,Point P3 ,GfxInfo TriGfxInfo, bool selected = false) const;  //Draw a triangle
 	void DrawLine(Point P1, Point P2, GfxInfo LineGfxInfo, bool selected = false) const; // Draw Line
 	///Make similar functions for drawing all other figures.
-	
+	void drawImg(int x, int y,int width,int height) const;
 	void PrintMessage(string msg) const;	//Print a message on Status bar
 	void PrintNumber(int N)const;
 	color getCrntDrawColor() const;	//get current drwawing color
