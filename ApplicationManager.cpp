@@ -6,6 +6,7 @@
 #include "Actions\ChangeDrawColor.h"
 #include "Actions\ChangeBKColor.h"
 #include "Actions\SelectAction.h"
+#include "Actions\DeleteAction.h"
 //Constructor
 ApplicationManager::ApplicationManager()
 {
@@ -65,6 +66,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case SELECT:
 			pAct = new SelectAction(this);
 			break;
+		case DEL:
+			pAct = new DeleteAction(this);
+			break;
 		case EXIT:
 			///create ExitAction here
 			
@@ -100,6 +104,14 @@ void ApplicationManager::AddFigure(CFigure* pFig)
 {
 	if(FigCount < MaxFigCount )
 		FigList[FigCount++] = pFig;	
+}
+void ApplicationManager::DelFigure(CFigure* pFig,int index)
+{
+	//pOut->DrawRect(pFig->)
+	delete pFig;
+	FigCount--;
+	FigList[index] = FigList[FigCount];
+	FigList[FigCount] = NULL;
 }
 ////////////////////////////////////////////////////////////////////////////////////
 CFigure *ApplicationManager::GetFigure(int x, int y) const

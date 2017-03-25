@@ -11,6 +11,11 @@ void Input::GetPointClicked(int &x, int &y) const
 {
 	pWind->WaitMouseClick(x, y);	//Wait for mouse click
 }
+buttonstate Input::GetMouseClicked(button butt,int &x, int &y) const
+{
+
+	return pWind->GetButtonState(butt,x,y);
+}
 
 string Input::GetSrting(Output *pO) const 
 {
@@ -58,7 +63,6 @@ ActionType Input::GetUserAction() const
 			case ITM_DRAWCOLOR: return CHNG_DRAW_CLR;
 			case ITM_BGRCOLOR: return CHNG_BK_CLR;
 			case ITM_SELECT: return SELECT;
-			case ITM_DELETE:return DEL;
 			case ITM_EXIT: return EXIT;
 			default: return EMPTY;	//A click on empty place in desgin toolbar
 			}

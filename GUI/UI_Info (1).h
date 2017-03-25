@@ -25,7 +25,6 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 	ITM_DRAWCOLOR,
 	ITM_BGRCOLOR,
 	ITM_SELECT,
-	ITM_DELETE,
 	//TODO: Add more items names here
 
 	ITM_EXIT,		//Exit item
