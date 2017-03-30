@@ -1,5 +1,4 @@
 #include "SelectAction.h"
-#include "..\Figures\CRectangle.h"
 
 #include "..\ApplicationManager.h"
 

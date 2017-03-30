@@ -22,9 +22,11 @@ void DeleteAction::Execute()
 		{
 			pManager->DelFigure(FigList[i], i);
 			FigCount--;
+			i--;
 		}
 
 	}
+	pManager->GetOutput()->ClearDrawArea();
 }
 
 

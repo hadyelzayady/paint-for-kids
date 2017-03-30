@@ -21,6 +21,7 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 	ITM_CIRC,		//Circle item in menu
 	ITM_TRI,
 	ITM_LINE,
+	ITM_RESIZE,
 	ITM_FILLCOLOR,
 	ITM_DRAWCOLOR,
 	ITM_BGRCOLOR,
