@@ -5,6 +5,7 @@
 #include "Figures\CFigure.h"
 #include "GUI\input.h"
 #include "GUI\output.h"
+#include <vector>
 //Main class that manages everything in the application.
 class ApplicationManager
 {
@@ -16,9 +17,9 @@ private:
 	//Pointers to Input and Output classes
 	Input *pIn;
 	Output *pOut;
-
 public:	
-	ApplicationManager(); 
+	ApplicationManager();
+	CFigure** copied;
 	~ApplicationManager();
 	int getFigCount()const
 	{

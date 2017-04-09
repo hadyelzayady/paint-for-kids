@@ -27,7 +27,7 @@ Output::Output()
 	//Create the output window
 	pWind = CreateWind(UI.width, UI.height, UI.wx, UI.wy);
 	//Change the title
-	pWind->ChangeTitle("Paint for Kids - Programming Techniques Project");
+	pWind->ChangeTitle("Paint for Kids");
 	
 	CreateDrawToolBar();
 	CreateStatusBar();
@@ -70,6 +70,7 @@ void Output::ClearStatusBar() const
 //////////////////////////////////////////////////////////////////////////////////////////
 void Output::CreateDrawToolBar() const
 {
+	ClearToolBar();
 	UI.InterfaceMode = MODE_DRAW;
 
 	//You can draw the tool bar icons in any way you want.
@@ -88,7 +89,9 @@ void Output::CreateDrawToolBar() const
 	MenuItemImages[ITM_DRAWCOLOR] = "images\\MenuItems\\Menu_Draw.jpg";
 	MenuItemImages[ITM_BGRCOLOR] = "images\\MenuItems\\Menu_BKColor.jpg";
 	MenuItemImages[ITM_SELECT] = "images\\MenuItems\\Menu_Select.jpg";
+	MenuItemImages[ITM_COPY] = "images\\MenuItems\\COPY.jpg";
 	MenuItemImages[ITM_DELETE] = "images\\MenuItems\\Menu_Delete.jpg";
+	MenuItemImages[PLAYMODE] = "images\\MenuItems\\PlayMode.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\MenuItems\\Menu_Exit.jpg";
 
 	//TODO: Prepare images for each menu item and add it to the list
@@ -105,11 +108,32 @@ void Output::CreateDrawToolBar() const
 
 }
 //////////////////////////////////////////////////////////////////////////////////////////
-
+void Output::ClearToolBar()const
+{
+	pWind->SetPen(WHITE, 1);
+	pWind->SetBrush(WHITE);
+	pWind->DrawRectangle(0,0, UI.width, UI.height);
+}
 void Output::CreatePlayToolBar() const
 {
+	ClearToolBar();
 	UI.InterfaceMode = MODE_PLAY;
 	///TODO: write code to create Play mode menu
+	string PlayModesImages[PLAY_ITM_COUNT];
+	PlayModesImages[PICKHIDE] = "images\\MenuItems\\Pick_Hide.jpg";
+	PlayModesImages[SCRAMBLE] = "images\\MenuItems\\Scramble_Find.jpg";
+	PlayModesImages[DRAWMODE] = "images\\MenuItems\\DrawMode.jpg";
+
+	for (int i = 0; i<PLAY_ITM_COUNT; i++)
+		pWind->DrawImage(PlayModesImages[i], i*UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+
+
+
+	//Draw a line under the toolbar
+	pWind->SetPen(RED, 3);
+	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
+
+
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 

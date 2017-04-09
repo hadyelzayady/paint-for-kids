@@ -15,7 +15,7 @@ ApplicationManager::ApplicationManager()
 	pIn = pOut->CreateInput();
 	
 	FigCount = 0;
-		
+	copied = NULL;
 	//Create an array of figure pointers and set them to NULL		
 	for(int i=0; i<MaxFigCount; i++)
 		FigList[i] = NULL;	
@@ -69,6 +69,16 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case DEL:
 			pAct = new DeleteAction(this);
 			break;
+		case TO_PLAY:
+			pOut->PrintMessage("Play Mode");
+			pOut->CreatePlayToolBar();
+			break;
+		case TO_DRAW:
+		{
+			pOut->PrintMessage("Play Mode");
+			pOut->CreateDrawToolBar();
+			break;
+		}
 		case EXIT:
 			///create ExitAction here
 			
