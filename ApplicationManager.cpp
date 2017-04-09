@@ -7,6 +7,8 @@
 #include "Actions\ChangeBKColor.h"
 #include "Actions\SelectAction.h"
 #include "Actions\DeleteAction.h"
+#include "Actions\Scramble.h"
+#include "Actions\PickAndHide.h"
 //Constructor
 ApplicationManager::ApplicationManager()
 {
@@ -73,16 +75,22 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			pOut->PrintMessage("Play Mode");
 			pOut->CreatePlayToolBar();
 			break;
+		case EXIT:
+			break;
+		/////////////////////////////////////////////////////// Play Mode
+		case PLAY_PICK_HIDE:
+			pAct = new PickAndHide(this);
+			break;
+		case PLAY_SCAMBLE_FIND:
+			pAct = new Scramble(this);
+			break;
 		case TO_DRAW:
 		{
-			pOut->PrintMessage("Play Mode");
+			pOut->PrintMessage("Draw Mode");
 			pOut->CreateDrawToolBar();
 			break;
 		}
-		case EXIT:
-			///create ExitAction here
 			
-			break;
 		default:
 			unselectAll();// unselect all selected figures
 		case STATUS:	//a click on the status bar ==> no action
