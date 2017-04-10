@@ -20,6 +20,7 @@ private:
 public:	
 	ApplicationManager();
 	vector<CFigure*> copied;
+	void deletecopied(vector<CFigure*>&arr);
 	Point refPoint;
 	~ApplicationManager();
 	int getFigCount()const

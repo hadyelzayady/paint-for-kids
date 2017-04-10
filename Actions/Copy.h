@@ -8,11 +8,9 @@ class Copy : public Action
 {
 public:
 	Copy(ApplicationManager *pApp);
-	//Reads rectangle parameters
 	static int numOfSelected; //
 	virtual void ReadActionParameters();
 
-	//Add rectangle to the ApplicationManager
 	virtual void Execute();
 
 };

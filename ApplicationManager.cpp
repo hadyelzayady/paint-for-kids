@@ -143,6 +143,13 @@ void ApplicationManager::DelFigure(CFigure* pFig,int index)
 	FigList[index] = FigList[FigCount];
 	FigList[FigCount] = NULL;
 }
+void ApplicationManager::deletecopied(vector<CFigure*>&arr)
+{
+	for (size_t i = 0; i < arr.size(); i++)
+	{
+		delete arr[i];
+	}
+}
 void ApplicationManager::setFigCount(int n)
 {
 	FigCount = n;
