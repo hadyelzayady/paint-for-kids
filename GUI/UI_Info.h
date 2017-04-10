@@ -27,6 +27,8 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 	ITM_BGRCOLOR,
 	ITM_SELECT,
 	ITM_COPY,
+	ITM_CUT,
+	ITM_PASTE,
 	ITM_DELETE,
 	//TODO: Add more items names here
 	PLAYMODE,

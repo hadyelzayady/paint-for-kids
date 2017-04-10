@@ -12,6 +12,8 @@ public:
 	CRectangle(Point , Point, GfxInfo FigureGfxInfo );
 	virtual void Draw(Output* pOut) const;
 	virtual bool isPointInFigure(int x, int y)const;
+	virtual void Move(int newx, int newy);
+	virtual CFigure* copy();
 };
 
 #endif

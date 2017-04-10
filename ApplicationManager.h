@@ -19,7 +19,8 @@ private:
 	Output *pOut;
 public:	
 	ApplicationManager();
-	CFigure** copied;
+	vector<CFigure*> copied;
+	Point refPoint;
 	~ApplicationManager();
 	int getFigCount()const
 	{
@@ -38,6 +39,7 @@ public:
 	// -- Figures Management Functions
 	void AddFigure(CFigure* pFig); //Adds a new figure to the FigList
 	void DelFigure(CFigure* pFig,int index);
+	void setFigCount(int n);
 	CFigure *GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
 		
 	// -- Interface Management Functions

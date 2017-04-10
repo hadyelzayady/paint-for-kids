@@ -9,6 +9,9 @@
 #include "Actions\DeleteAction.h"
 #include "Actions\Scramble.h"
 #include "Actions\PickAndHide.h"
+#include "Actions\Copy.h"
+#include "Actions\Paste.h"
+#include "Actions\Cut.h"
 //Constructor
 ApplicationManager::ApplicationManager()
 {
@@ -17,7 +20,7 @@ ApplicationManager::ApplicationManager()
 	pIn = pOut->CreateInput();
 	
 	FigCount = 0;
-	copied = NULL;
+//	copied = NULL;
 	//Create an array of figure pointers and set them to NULL		
 	for(int i=0; i<MaxFigCount; i++)
 		FigList[i] = NULL;	
@@ -71,6 +74,15 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case DEL:
 			pAct = new DeleteAction(this);
 			break;
+		case COPY:
+			pAct = new Copy(this);
+			break;
+		case CUT:
+			pAct = new Cut(this);
+			break;
+		case PASTE:
+			pAct = new Paste(this);
+			break;
 		case TO_PLAY:
 			pOut->PrintMessage("Play Mode");
 			pOut->CreatePlayToolBar();
@@ -112,7 +124,7 @@ void ApplicationManager::unselectAll() const // clicks on empty drawing area -> 
 {
 	SelectAction::numOfSelected = 0;
 	pOut->PrintMessage("All Unselected");
-	for (size_t i = 0; i < FigCount; i++)
+	for (int i = 0; i < FigCount; i++)
 	{
 		FigList[i]->SetSelected(false);
 	}
@@ -130,6 +142,10 @@ void ApplicationManager::DelFigure(CFigure* pFig,int index)
 	FigCount--;
 	FigList[index] = FigList[FigCount];
 	FigList[FigCount] = NULL;
+}
+void ApplicationManager::setFigCount(int n)
+{
+	FigCount = n;
 }
 ////////////////////////////////////////////////////////////////////////////////////
 CFigure *ApplicationManager::GetFigure(int x, int y) const

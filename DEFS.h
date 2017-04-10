@@ -32,7 +32,9 @@ enum ActionType //The actions supported (you can add more if needed)
 	TO_PLAY,			//Switch interface to Play mode
 	PLAY_PICK_HIDE,
 	PLAY_SCAMBLE_FIND,
-
+	COPY,
+	PASTE,
+	CUT,
 	///TODO: Add more action types (if needed)
 };
 

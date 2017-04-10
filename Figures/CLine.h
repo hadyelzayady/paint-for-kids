@@ -12,6 +12,8 @@ public:
 	CLine(Point, Point, GfxInfo FigureGfxInfo);
 	virtual bool isPointInFigure(int x, int y)const;
 	virtual void Draw(Output* pOut) const;
+	virtual void Move(int newx, int newy);
+	virtual CFigure* copy();
 };
 
 #endif

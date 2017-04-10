@@ -12,6 +12,17 @@ void CFigure::SetSelected(bool s)
 bool CFigure::IsSelected() const
 {	return Selected; }
 
+void CFigure::setCenter(int x,int y)
+{
+	Center.x = x;
+	Center.y = y;
+}
+
+Point CFigure::getCenter() const
+{
+	return Center;
+}
+
 void CFigure::ChngDrawClr(color Dclr)
 {	FigGfxInfo.DrawClr = Dclr; }
 

@@ -18,3 +18,12 @@ bool CTriangle::isPointInFigure(int x, int y)const
 {
 	return  false;
 }
+
+CFigure * CTriangle::copy()
+{
+	return nullptr;
+}
+
+void CTriangle::Move(int x, int y)
+{
+}

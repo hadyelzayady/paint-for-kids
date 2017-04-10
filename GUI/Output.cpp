@@ -90,6 +90,8 @@ void Output::CreateDrawToolBar() const
 	MenuItemImages[ITM_BGRCOLOR] = "images\\MenuItems\\Menu_BKColor.jpg";
 	MenuItemImages[ITM_SELECT] = "images\\MenuItems\\Menu_Select.jpg";
 	MenuItemImages[ITM_COPY] = "images\\MenuItems\\COPY.jpg";
+	MenuItemImages[ITM_CUT] = "images\\MenuItems\\Cut.jpg";
+	MenuItemImages[ITM_PASTE]= "images\\MenuItems\\Paste.jpg";
 	MenuItemImages[ITM_DELETE] = "images\\MenuItems\\Menu_Delete.jpg";
 	MenuItemImages[PLAYMODE] = "images\\MenuItems\\PlayMode.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\MenuItems\\Menu_Exit.jpg";

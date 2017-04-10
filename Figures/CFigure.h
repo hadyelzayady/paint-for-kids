@@ -12,12 +12,13 @@ protected:
 	bool Selected;	//true if the figure is selected.
 	GfxInfo FigGfxInfo;	//Figure graphis info
 	/// Add more parameters if needed.
-
+	Point Center;
 public:
 	CFigure(GfxInfo FigureGfxInfo);
 	void SetSelected(bool s);	//select/unselect the figure
 	bool IsSelected() const;	//check whether fig is selected
-
+	void setCenter(int x,int y);
+	Point getCenter()const;
 	virtual void Draw(Output* pOut) const  = 0 ;		//Draw the figure
 	virtual bool isPointInFigure(int x, int y)const=0;
 	void ChngDrawClr(color Dclr);	//changes the figure's drawing color
@@ -27,11 +28,11 @@ public:
 	///It should be overridden by each inherited figure
 
 	///Decide the parameters that you should pass to each function	
-
+	virtual CFigure* copy()=0;
 
 	//virtual void Rotate() = 0;	//Rotate the figure
 	//virtual void Resize() = 0;	//Resize the figure
-	//virtual void Move() = 0;		//Move the figure
+	virtual void Move(int x,int y)=0 ;		//Move the figure
 
 	//virtual void Save(ofstream &OutFile) = 0;	//Save the figure parameters to the file
 	//virtual void Load(ifstream &Infile) = 0;	//Load the figure parameters to the file

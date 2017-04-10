@@ -58,6 +58,9 @@ ActionType Input::GetUserAction() const
 			case ITM_DRAWCOLOR: return CHNG_DRAW_CLR;
 			case ITM_BGRCOLOR: return CHNG_BK_CLR;
 			case ITM_SELECT: return SELECT;
+			case ITM_COPY:return COPY;
+			case ITM_CUT:return CUT;
+			case ITM_PASTE:return PASTE;
 			case ITM_DELETE:return DEL;
 			case PLAYMODE:return TO_PLAY;
 			case ITM_EXIT: return EXIT;
