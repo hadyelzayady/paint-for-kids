@@ -11,6 +11,7 @@ void ChangeBKColor::ReadActionParameters()
 
 void ChangeBKColor::Execute()
 {
+	pManager->GetOutput()->PrintMessage("Change BackGround Color");
 	colorsWin.DrawRect();
 	bool isselected = colorsWin.selectColor();
 	colorsWin.closeRect();

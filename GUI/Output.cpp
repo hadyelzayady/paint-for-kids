@@ -14,7 +14,7 @@ Output::Output()
 	
 	UI.StatusBarHeight = 50;
 	UI.ToolBarHeight = 50;
-	UI.MenuItemWidth = 80;
+	UI.MenuItemWidth = 70;
 	
 	UI.DrawColor = BLUE;	//Drawing color
 	UI.FillColor = GREEN;	//Filling color
@@ -91,8 +91,11 @@ void Output::CreateDrawToolBar() const
 	MenuItemImages[ITM_SELECT] = "images\\MenuItems\\Menu_Select.jpg";
 	MenuItemImages[ITM_COPY] = "images\\MenuItems\\COPY.jpg";
 	MenuItemImages[ITM_CUT] = "images\\MenuItems\\Cut.jpg";
-	MenuItemImages[ITM_PASTE]= "images\\MenuItems\\Paste.jpg";
+	MenuItemImages[ITM_PASTE] = "images\\MenuItems\\Paste.jpg";
 	MenuItemImages[ITM_DELETE] = "images\\MenuItems\\Menu_Delete.jpg";
+	MenuItemImages[ITM_MOVE] = "images\\MenuItems\\Move.jpg";
+	MenuItemImages[ITM_LOAD]= "images\\MenuItems\\Load.jpg";
+	MenuItemImages[ITM_SAVE] = "images\\MenuItems\\Save.jpg";
 	MenuItemImages[PLAYMODE] = "images\\MenuItems\\PlayMode.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\MenuItems\\Menu_Exit.jpg";
 
@@ -207,6 +210,29 @@ void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) co
 	
 	pWind->DrawRectangle(P1.x, P1.y, P2.x, P2.y, style);
 	
+}
+void Output::DrawCirc(Point Cent, int Rad, GfxInfo RectGfxInfo, bool selected) const
+{
+	color DrawingClr;
+	if (selected)
+		DrawingClr = UI.HighlightColor; //Figure should be drawn highlighted
+	else
+		DrawingClr = RectGfxInfo.DrawClr;
+
+	pWind->SetPen(DrawingClr, RectGfxInfo.BorderWdth);	//Set Drawing color & width
+
+	drawstyle style;
+	if (RectGfxInfo.isFilled)
+	{
+		style = FILLED;
+		pWind->SetBrush(RectGfxInfo.FillClr);
+	}
+	else
+		style = FRAME;
+
+
+	pWind->DrawCircle(Cent.x, Cent.y, Rad, style);
+
 }
 
 void Output::DrawTri(Point P1, Point P2,Point P3, GfxInfo TriGfxInfo, bool selected) const

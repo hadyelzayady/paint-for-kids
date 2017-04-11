@@ -17,7 +17,6 @@ void Cut::Execute()
 {
 	pManager->GetOutput()->PrintMessage("Copying");
 	CFigure** FigList = pManager->getFigList();
-	int FigCount = pManager->getFigCount();
 	vector<CFigure*>&copiedArr = pManager->copied;
 	pManager->deletecopied(copiedArr);// remember to delete cutted figures
 	size_t numOfCopied = 0;

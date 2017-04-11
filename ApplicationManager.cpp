@@ -12,6 +12,7 @@
 #include "Actions\Copy.h"
 #include "Actions\Paste.h"
 #include "Actions\Cut.h"
+#include "Actions\AddCircAct.h"
 //Constructor
 ApplicationManager::ApplicationManager()
 {
@@ -48,7 +49,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			unselectAll();// unselect all selected figures
 			break;
 		case DRAW_CIRC:
-
+			pAct = new AddCircAction(this);
 			break;
 		case DRAW_TRI:
 			pAct = new AddTriAction(this);
@@ -149,6 +150,7 @@ void ApplicationManager::deletecopied(vector<CFigure*>&arr)
 	{
 		delete arr[i];
 	}
+	arr.clear();
 }
 void ApplicationManager::setFigCount(int n)
 {

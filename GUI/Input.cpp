@@ -61,6 +61,9 @@ ActionType Input::GetUserAction() const
 			case ITM_COPY:return COPY;
 			case ITM_CUT:return CUT;
 			case ITM_PASTE:return PASTE;
+			case ITM_LOAD:return LOAD;
+			case ITM_SAVE:return SAVE;
+			case ITM_MOVE:return MOVE;
 			case ITM_DELETE:return DEL;
 			case PLAYMODE:return TO_PLAY;
 			case ITM_EXIT: return EXIT;
