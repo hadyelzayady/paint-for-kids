@@ -8,7 +8,7 @@ class AddCircAction : public Action
 {
 private:
 	Point P1, P2; //Rectangle Corners
-	GfxInfo RectGfxInfo;
+	GfxInfo CircGfxInfo;
 public:
 	AddCircAction(ApplicationManager *pApp);
 

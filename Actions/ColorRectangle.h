@@ -6,6 +6,7 @@ class ColorRectangle : public Action
 	const int width = 13;// rectangle of one color
 	const int height = 13;
 	color chosencolor;
+	bool isFilled;
 	int x, y;// pos of clicked color
 	const color colors[144] = { SNOW,GHOSTWHITE,WHITESMOKE,GAINSBORO,FLORALWHITE,OLDLACE,LINEN,ANTIQUEWHITE,PAPAYAWHIP,BLANCHEDALMOND,BISQUE,PEACHPUFF,NAVAJOWHITE,
 		MOCCASIN,CORNSILK,IVORY,LEMONCHIFFON,SEASHELL,HONEYDEW,MINTCREAM,AZURE,ALICEBLUE,LAVENDER,LAVENDERBLUSH,MISTYROSE,WHITE,BLACK,DARKSLATEGRAY,DARKSLATEGREY,DIMGRAY
@@ -22,6 +23,7 @@ public:
 	void DrawRect() const;
 	virtual void ReadActionParameters();
 	bool selectColor() ;// if color selected returned true and the color in chosencolor 
+	bool isfilled();
 	color getcolor() const;
 	void closeRect() const;
 	//Add Line to the ApplicationManager

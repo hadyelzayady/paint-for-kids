@@ -4,6 +4,7 @@
 class ChangeFillColor : public Action
 {
 	ColorRectangle colorsWin;
+	bool filled;
 public:
 	ChangeFillColor(ApplicationManager* pApp);
 

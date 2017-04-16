@@ -35,6 +35,8 @@ enum ActionType //The actions supported (you can add more if needed)
 	COPY,
 	PASTE,
 	CUT,
+	ZOOMIN,
+	ZOOMOUT,
 	///TODO: Add more action types (if needed)
 };
 

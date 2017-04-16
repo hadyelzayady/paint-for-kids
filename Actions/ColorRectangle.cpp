@@ -6,7 +6,7 @@ ColorRectangle::ColorRectangle(ApplicationManager*pApp,int x) :Action(pApp)
 {
 	this->P1.x = x;
 	this->P1.y = 54;
-	this->P2.x = P1.x+8*(width+1)-1;// 8 squares in row ,each square with width+margin 1 except last square
+	this->P2.x = P1.x+8*(width+1)-1+10;// 8 squares in row ,each square with width+margin 1 except last square
 	this->P2.y = P1.y + 18 * (height + 1) - 1;
 }
 void ColorRectangle::ReadActionParameters()
@@ -26,11 +26,16 @@ bool  ColorRectangle::selectColor()
 		int indexI = (x - P1.x) / (width + 1);// git distance from corner1 then divide it by width of colorRec+1 ; 1 because-> margin; -1 ->arr indexed from 0
 		int indexJ = (y - P1.y) / (height + 1);
 		int index = indexI + 8 * indexJ;// 8 color per row
-		chosencolor=colors[index];
+		chosencolor = index < 144 ? colors[index] : 0;//not working well ,index is less than the correct index
+		isFilled = index > 143 ? false : true;
 		return true;
 	}
 	
 	return false;
+}
+bool ColorRectangle::isfilled()
+{
+	return isFilled;
 }
 void ColorRectangle::DrawRect() const
 {

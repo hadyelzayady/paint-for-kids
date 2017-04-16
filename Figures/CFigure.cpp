@@ -32,3 +32,8 @@ void CFigure::ChngFillClr(color Fclr)
 	FigGfxInfo.FillClr = Fclr; 
 }
 
+void CFigure::chngIsFilled(bool isfilled)
+{
+	FigGfxInfo.isFilled = isfilled;
+}
+

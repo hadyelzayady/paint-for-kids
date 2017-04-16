@@ -15,8 +15,14 @@ void ChangeFillColor::changeAllSelected() const
 	size_t count = pManager->getFigCount();
 	for (size_t i = 0; i < count; i++)
 	{
-		if(FigList[i]->IsSelected())
-			FigList[i]->ChngFillClr(UI.FillColor);
+		if (FigList[i]->IsSelected())
+		{
+			if(!filled)
+				FigList[i]->chngIsFilled(filled);
+			else
+				FigList[i]->ChngFillClr(UI.FillColor);
+		}
+
 	}
 }
 void ChangeFillColor::Execute()
@@ -27,7 +33,8 @@ void ChangeFillColor::Execute()
 	colorsWin.closeRect();
 	if (!isselected)
 		return;
-	UI.FillColor =colorsWin.getcolor() ;
+	filled = colorsWin.isfilled();
+	UI.FillColor = colorsWin.getcolor();
 	changeAllSelected();
 	colorsWin.closeRect();
 }

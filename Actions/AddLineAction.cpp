@@ -19,11 +19,11 @@ void AddLineAction::ReadActionParameters()
 	//Read 1st corner and store in point P1
 	pIn->GetPointClicked(P1.x, P1.y);
 	///////////////////////////////////////////////////////////////////
-	pOut->PrintMessage("New Line: Click at end point");
+	pOut->PrintMessage("New Line: Click at end point ,right click for filled");
 	//Read 2nd corner and store in point P2
-	pIn->GetPointClicked(P2.x, P2.y);
-	///////////////////////////////////////////////////////////////////
-	LineGfxInfo.isFilled = false;	//default is not filled
+	clicktype clk = pIn->GetPointClicked(P2.x, P2.y);
+
+	LineGfxInfo.isFilled = clk == RIGHT_CLICK ? true : false;	//default is not filled
 									//get drawing, filling colors and pen width from the interface
 	LineGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	LineGfxInfo.FillClr = pOut->getCrntFillColor();

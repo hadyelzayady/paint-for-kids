@@ -14,7 +14,7 @@ Output::Output()
 	
 	UI.StatusBarHeight = 50;
 	UI.ToolBarHeight = 50;
-	UI.MenuItemWidth = 70;
+	UI.MenuItemWidth = 60;
 	
 	UI.DrawColor = BLUE;	//Drawing color
 	UI.FillColor = GREEN;	//Filling color
@@ -94,7 +94,9 @@ void Output::CreateDrawToolBar() const
 	MenuItemImages[ITM_PASTE] = "images\\MenuItems\\Paste.jpg";
 	MenuItemImages[ITM_DELETE] = "images\\MenuItems\\Menu_Delete.jpg";
 	MenuItemImages[ITM_MOVE] = "images\\MenuItems\\Move.jpg";
-	MenuItemImages[ITM_LOAD]= "images\\MenuItems\\Load.jpg";
+	MenuItemImages[ITM_LOAD] = "images\\MenuItems\\Load.jpg";
+	MenuItemImages[ITM_ZOOM_IN] = "images\\MenuItems\\ZoomIn.jpg";
+	MenuItemImages[ITM_ZOOM_OUT]= "images\\MenuItems\\ZoomOut.jpg";
 	MenuItemImages[ITM_SAVE] = "images\\MenuItems\\Save.jpg";
 	MenuItemImages[PLAYMODE] = "images\\MenuItems\\PlayMode.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\MenuItems\\Menu_Exit.jpg";
