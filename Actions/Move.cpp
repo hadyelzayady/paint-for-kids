@@ -9,34 +9,25 @@ Move::Move(ApplicationManager * pApp) :Action(pApp)
 {}
 void Move::ReadActionParameters()
 {
-
+	int x, y;
+	pManager->GetOutput()->PrintMessage("Moving ,click on the new position");
+	pManager->GetInput()->GetPointClicked(x, y);
+	CFigure** FigList = pManager->getFigList();
+	int FigCount = pManager->getFigCount();
+	for (int i = 0; i < pManager->getFigCount(); i++)
+	{
+		if (FigList[i]->IsSelected())
+		{
+			int newx = x + FigList[i]->getCenter().x - pManager->refPoint.x;//get the new shifted center of copied figures
+			int newy = y + FigList[i]->getCenter().y - pManager->refPoint.y;
+			FigList[i]->Move(newx, newy);// move -> moves the figure center to newx,newy
+		}
+	}
+	pManager->GetOutput()->ClearDrawArea();
 }
 
 //Execute the action
 void Move::Execute()
 {
-	pManager->GetOutput()->PrintMessage("Moving");
-	CFigure** FigList = pManager->getFigList();
-	int FigCount = pManager->getFigCount();
-	vector<CFigure*>&copiedArr = pManager->copied;
-	pManager->deletecopied(copiedArr);// remember to delete cutted figures
-	size_t numOfCopied = 0;
-	int minx = UI.width;// to get the fig with min x as my reference to for pasting later
-	Point &refPoint = pManager->refPoint = { UI.width,0 };// to determine the min x and take it as my ref
-	for (int i = 0; i < pManager->getFigCount(); i++)
-	{
-		if (FigList[i]->IsSelected())
-		{
-			CFigure*newFig = FigList[i]->copy();
-			copiedArr.push_back(newFig);
-			numOfCopied++;
-			pManager->refPoint = FigList[i]->getCenter().x < refPoint.x ? FigList[i]->getCenter() : refPoint;
-			//remove the fig from figlist
-			pManager->DelFigure(FigList[i], i);
-			i--;// to check the fig that moved from end of figlist to the new pos
-		}
-
-	}
-	copiedArr.resize(numOfCopied);
-	pManager->GetOutput()->ClearDrawArea();
+	ReadActionParameters();
 }

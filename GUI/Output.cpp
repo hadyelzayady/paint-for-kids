@@ -85,6 +85,7 @@ void Output::CreateDrawToolBar() const
 	MenuItemImages[ITM_TRI] = "images\\MenuItems\\Menu_Tri.jpg";
 	MenuItemImages[ITM_LINE] = "images\\MenuItems\\Menu_Line.jpg";
 	MenuItemImages[ITM_RESIZE] = "images\\MenuItems\\Resize.jpg";
+	MenuItemImages[ITM_FILL] = "images\\MenuItems\\UnFill.jpg";
 	MenuItemImages[ITM_FILLCOLOR] = "images\\MenuItems\\Menu_Fill.jpg";
 	MenuItemImages[ITM_DRAWCOLOR] = "images\\MenuItems\\Menu_Draw.jpg";
 	MenuItemImages[ITM_BGRCOLOR] = "images\\MenuItems\\Menu_BKColor.jpg";
@@ -181,13 +182,18 @@ color Output::getCrntFillColor() const	//get current filling color
 int Output::getCrntPenWidth() const		//get current pen width
 {	return UI.PenWidth;	}
 
-void Output::drawImg(int x, int y,int width,int height) const
+void Output::drawImg(int x, int y,int width,int height,const  string imagePath) const
 {
-	pWind->DrawImage("images\\MenuItems\\colorsPallete.jpg", x, y, width, height);
+	pWind->DrawImage(imagePath, x, y, width, height);
 }
 //======================================================================================//
 //								Figures Drawing Functions								//
 //======================================================================================//
+
+void Output::DrawString(int x, int y, string str) const
+{
+	pWind->DrawString(x, y, str);
+}
 
 void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) const
 {

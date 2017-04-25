@@ -24,6 +24,7 @@ public:
 	void ChngDrawClr(color Dclr);	//changes the figure's drawing color
 	void ChngFillClr(color Fclr);	//changes the figure's filling color
 	void chngIsFilled(bool);
+	GfxInfo getGfxInfo()const;
 	///The following functions should be supported by the figure class
 	///It should be overridden by each inherited figure
 
@@ -31,7 +32,7 @@ public:
 	virtual CFigure* copy()=0;
 
 	//virtual void Rotate() = 0;	//Rotate the figure
-	//virtual void Resize() = 0;	//Resize the figure
+	virtual void Resize(float) = 0;	//Resize the figure
 	virtual void Move(int x,int y)=0 ;		//Move the figure
 
 	//virtual void Save(ofstream &OutFile) = 0;	//Save the figure parameters to the file

@@ -21,7 +21,6 @@ void ZoomIn::Execute()
 	vector<CFigure*>&copiedArr = pManager->copied;
 	pManager->deletecopied(copiedArr);// remember to delete cutted figures
 	size_t numOfCopied = 0;
-	int minx = UI.width;// to get the fig with min x as my reference to for pasting later
 	Point &refPoint = pManager->refPoint = { UI.width,0 };// to determine the min x and take it as my ref
 	for (int i = 0; i < pManager->getFigCount(); i++)
 	{

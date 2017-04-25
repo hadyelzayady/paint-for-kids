@@ -18,9 +18,11 @@ private:
 	Input *pIn;
 	Output *pOut;
 public:	
+	bool isFilled;
 	ApplicationManager();
 	vector<CFigure*> copied;
 	void deletecopied(vector<CFigure*>&arr);
+	Point refPointPaste;
 	Point refPoint;
 	~ApplicationManager();
 	int getFigCount()const

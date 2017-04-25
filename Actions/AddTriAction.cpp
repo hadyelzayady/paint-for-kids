@@ -25,9 +25,9 @@ void AddTriAction:: ReadActionParameters()
 	///////////////////////////////////////////////////////////////////
 	pOut->PrintMessage("New Rectangle: Click at third corner ,right click for filled");
 	//Read 3rd corner and store in point P3
-	clicktype clk = pIn->GetPointClicked(P2.x, P2.y);
+	pIn->GetPointClicked(P3.x, P3.y);
 
-	TriGfxInfo.isFilled = clk == RIGHT_CLICK ? true : false;	//default is not filled
+	TriGfxInfo.isFilled = pManager->isFilled;	//default is not filled
 									//get drawing, filling colors and pen width from the interface
 	TriGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	TriGfxInfo.FillClr = pOut->getCrntFillColor();

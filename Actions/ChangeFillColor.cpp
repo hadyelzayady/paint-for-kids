@@ -17,9 +17,7 @@ void ChangeFillColor::changeAllSelected() const
 	{
 		if (FigList[i]->IsSelected())
 		{
-			if(!filled)
-				FigList[i]->chngIsFilled(filled);
-			else
+			if (FigList[i]->getGfxInfo().isFilled==true)
 				FigList[i]->ChngFillClr(UI.FillColor);
 		}
 
@@ -33,7 +31,6 @@ void ChangeFillColor::Execute()
 	colorsWin.closeRect();
 	if (!isselected)
 		return;
-	filled = colorsWin.isfilled();
 	UI.FillColor = colorsWin.getcolor();
 	changeAllSelected();
 	colorsWin.closeRect();

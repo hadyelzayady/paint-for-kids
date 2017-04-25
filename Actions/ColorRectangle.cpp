@@ -26,8 +26,7 @@ bool  ColorRectangle::selectColor()
 		int indexI = (x - P1.x) / (width + 1);// git distance from corner1 then divide it by width of colorRec+1 ; 1 because-> margin; -1 ->arr indexed from 0
 		int indexJ = (y - P1.y) / (height + 1);
 		int index = indexI + 8 * indexJ;// 8 color per row
-		chosencolor = index < 144 ? colors[index] : 0;//not working well ,index is less than the correct index
-		isFilled = index > 143 ? false : true;
+		chosencolor = colors[index];
 		return true;
 	}
 	
@@ -61,8 +60,6 @@ void ColorRectangle::DrawRect() const
 		tempP1.y = tempP2.y + 1;//y1 of next rect ,margin=1px
 		tempP1.x = P1.x; // start the next row from original x
 	}
-	// add fill option
-	pOut->
 }
 void ColorRectangle::closeRect() const
 { 

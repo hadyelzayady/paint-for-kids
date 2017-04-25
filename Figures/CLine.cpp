@@ -16,6 +16,9 @@ void CLine::Draw(Output* pOut) const
 void CLine::Move(int newx, int newy)
 {
 }
+void CLine::Resize(float)
+{
+}
 CFigure * CLine::copy()
 {
 	return nullptr;

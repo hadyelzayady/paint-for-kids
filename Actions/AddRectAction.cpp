@@ -22,9 +22,9 @@ void AddRectAction::ReadActionParameters()
 
 	pOut->PrintMessage("New Rectangle: Click at second corner,right click for filled");
 
-	clicktype clk = pIn->GetPointClicked(P2.x, P2.y);
+	pIn->GetPointClicked(P2.x, P2.y);
 
-	RectGfxInfo.isFilled = clk == RIGHT_CLICK ? true : false;	//default is not filled
+	RectGfxInfo.isFilled = pManager->isFilled;	//default is not filled
 	//get drawing, filling colors and pen width from the interface
 	RectGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	RectGfxInfo.FillClr = pOut->getCrntFillColor();

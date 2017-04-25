@@ -13,13 +13,16 @@
 #include "Actions\Paste.h"
 #include "Actions\Cut.h"
 #include "Actions\AddCircAct.h"
+#include "Actions\FillingAct.h"
+#include "Actions\Move.h"
+#include "Actions\ResizeAction.h"
 //Constructor
 ApplicationManager::ApplicationManager()
 {
 	//Create Input and output
 	pOut = new Output;
 	pIn = pOut->CreateInput();
-	
+	isFilled = false;
 	FigCount = 0;
 //	copied = NULL;
 	//Create an array of figure pointers and set them to NULL		
@@ -63,6 +66,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case CHNG_FILL_CLR:
 			pAct = new ChangeFillColor(this);
 			break;
+		case FILL:
+			pAct = new FillingAct(this);
+			break;
 		case CHNG_DRAW_CLR:
 			pAct = new ChangeDrawColor(this);
 			break;
@@ -71,6 +77,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			break;
 		case SELECT:
 			pAct = new SelectAction(this);
+			break;
+		case MOVE:
+			pAct = new Move(this);
 			break;
 		case DEL:
 			pAct = new DeleteAction(this);
@@ -83,6 +92,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			break;
 		case PASTE:
 			pAct = new Paste(this);
+			break;
+		case RESIZE:
+			pAct = new ResizeAction(this);
 			break;
 		case TO_PLAY:
 			pOut->PrintMessage("Play Mode");

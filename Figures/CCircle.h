@@ -13,6 +13,7 @@ public:
 	virtual void Draw(Output* pOut) const;
 	virtual bool isPointInFigure(int x, int y)const;
 	virtual void Move(int newx, int newy);
+	virtual void Resize(float);
 	virtual CFigure* copy();
 };
 

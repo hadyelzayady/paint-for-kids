@@ -37,3 +37,8 @@ void CFigure::chngIsFilled(bool isfilled)
 	FigGfxInfo.isFilled = isfilled;
 }
 
+GfxInfo CFigure::getGfxInfo() const
+{
+	return FigGfxInfo;
+}
+

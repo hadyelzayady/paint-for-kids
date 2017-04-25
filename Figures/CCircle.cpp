@@ -25,6 +25,11 @@ void CCircle::Move(int newx, int newy)
 	CircCent.y += newy - CircCent.y;
 }
 
+void CCircle::Resize(float resize)
+{
+	Rad *= resize;
+}
+
 CFigure * CCircle::copy()
 {
 	return new CCircle(*this);

@@ -22,8 +22,7 @@ void Copy::Execute()
 	vector<CFigure*>&copiedArr = pManager->copied;
 	pManager->deletecopied(copiedArr);
 	size_t numOfCopied=0;
-	int minx = UI.width;// to get the fig with min x as my reference to for pasting later
-	Point &refPoint = pManager->refPoint = { UI.width,0 };// to determine the min x and take it as my ref
+	Point &refPointPaste = pManager->refPointPaste = { UI.width,0 };// to determine the min x and take it as my ref
 	for (int i = 0; i < FigCount; i++)
 	{
 		if (FigList[i]->IsSelected())
@@ -31,7 +30,7 @@ void Copy::Execute()
 			CFigure*newFig = FigList[i]->copy();
 			copiedArr.push_back(newFig);
 			numOfCopied++;
-			pManager->refPoint = FigList[i]->getCenter().x < refPoint.x ? FigList[i]->getCenter(): refPoint;
+			refPointPaste = FigList[i]->getCenter().x < refPointPaste.x ? FigList[i]->getCenter(): refPointPaste;
 		}
 
 	}

@@ -14,4 +14,5 @@ public:
 	virtual bool isPointInFigure(int x, int y)const;
 	virtual CFigure* copy();
 	virtual void Move(int x, int y);
+	virtual void Resize(float);
 };

@@ -23,9 +23,9 @@ void AddCircAction::ReadActionParameters()
 	pOut->PrintMessage("New Rectangle: Click at a second point to determine radius,right click for filled");
 
 	//Read 2nd corner and store in point P2
-	clicktype clk= pIn->GetPointClicked(P2.x, P2.y);
+	pIn->GetPointClicked(P2.x, P2.y);
 
-	CircGfxInfo.isFilled = clk == RIGHT_CLICK ? true : false;	//default is not filled
+	CircGfxInfo.isFilled = pManager->isFilled;	//default is not filled
 									//get drawing, filling colors and pen width from the interface
 	CircGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	CircGfxInfo.FillClr = pOut->getCrntFillColor();

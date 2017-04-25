@@ -23,6 +23,7 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 	ITM_LINE,
 	ITM_RESIZE,
 	ITM_MOVE,
+	ITM_FILL,
 	ITM_FILLCOLOR,
 	ITM_DRAWCOLOR,
 	ITM_BGRCOLOR,

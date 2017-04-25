@@ -12,7 +12,6 @@ void SelectAction::ReadActionParameters()
 	//Get a Pointer to the Input / Output Interfaces
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
-
 	pOut->PrintMessage("Select Figure(s)...");
 	int x, y;
 	while (true)
@@ -25,26 +24,29 @@ void SelectAction::ReadActionParameters()
 			return;
 		bool Selected = selectedFig->IsSelected();
 		selectedFig->SetSelected(!Selected);
+		//selectedFig->chngIsFilled(pManager->isFilled);
 		selectedFig->Draw(pOut);
-		if (Selected)// it is now unselected as selected has the prev state
-		{
-			numOfSelected--;
-
-		}
-		else// it is now selected
+		Selected=!Selected ;//
+		if (Selected)// e
 		{
 			numOfSelected++;
+
+		}
+		else// 
+		{
+			numOfSelected--;
 		}
 		if (numOfSelected == 1)
 		{
 			// print fig info
+			pOut->PrintMessage("Fig Info");
 		}
 		else
-				pOut->PrintNumber(numOfSelected);
+			pOut->PrintNumber(numOfSelected);
 		}
 
 
-	}
+}
 
 
 //Execute the action
@@ -52,5 +54,18 @@ void SelectAction::Execute()
 {
 	//This action needs to read some parameters first
 	ReadActionParameters();
+	// set ref point to use it in paste and move
+	int FigCount = pManager->getFigCount();
+	CFigure**FigList = pManager->getFigList();
+	Point &refPoint = pManager->refPoint = { UI.width,0 };// to determine the min x and take it as my ref
+	for (int i = 0; i < FigCount; i++)
+	{
+		if (FigList[i]->IsSelected())
+		{
+			pManager->refPoint = FigList[i]->getCenter().x < refPoint.x ? FigList[i]->getCenter() : refPoint;
+		}
+
+	}
+
 
 }
