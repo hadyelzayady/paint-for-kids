@@ -115,11 +115,11 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			pOut->CreateDrawToolBar();
 			break;
 		}
-			
-		default:
-			unselectAll();// unselect all selected figures
+		
 		case STATUS:	//a click on the status bar ==> no action
 			return;
+		default:
+			unselectAll();// unselect all selected figures
 	}
 	
 	//Execute the created action

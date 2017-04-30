@@ -6,8 +6,8 @@ Output::Output()
 	//Initialize user interface parameters
 	UI.InterfaceMode = MODE_DRAW;
 	
-	UI.width = 1300;
-	UI.height = 700;
+	UI.width = 1500;
+	UI.height = 800;
 	UI.wx = 5;
 	UI.wy =5;
 
@@ -185,6 +185,10 @@ int Output::getCrntPenWidth() const		//get current pen width
 void Output::drawImg(int x, int y,int width,int height,const  string imagePath) const
 {
 	pWind->DrawImage(imagePath, x, y, width, height);
+}
+void Output::screenshot(image & img, int x, int y, int width, int height)
+{
+	pWind->StoreImage(img, x, y, width, height);
 }
 //======================================================================================//
 //								Figures Drawing Functions								//

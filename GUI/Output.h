@@ -26,6 +26,7 @@ public:
 	void DrawCirc(Point Cent, int Rad, GfxInfo RectGfxInfo, bool selected) const;
 	///Make similar functions for drawing all other figures.
 	void drawImg(int x, int y,int width,int height,const string imagePath) const;
+	void screenshot(image&img, int x, int y, int width, int height);
 	void PrintMessage(string msg) const;	//Print a message on Status bar
 	void PrintNumber(int N)const;
 	color getCrntDrawColor() const;	//get current drwawing color

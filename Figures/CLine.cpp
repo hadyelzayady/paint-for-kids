@@ -16,12 +16,14 @@ void CLine::Draw(Output* pOut) const
 void CLine::Move(int newx, int newy)
 {
 }
-void CLine::Resize(float)
+void CLine::Resize(float resize)
 {
+	End.x = (Start.x + End.x) * resize;
+	End.y = (Start.y + End.y) * resize;
 }
 CFigure * CLine::copy()
 {
-	return nullptr;
+	return new CLine(*this);
 }
 bool CLine::isPointInFigure(int x, int y)const
 {

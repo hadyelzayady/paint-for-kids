@@ -5,6 +5,8 @@ CTriangle::CTriangle(Point P1, Point P2,Point P3, GfxInfo FigureGfxInfo) :CFigur
 	Corner1 = P1;
 	Corner2 = P2;
 	Corner3 = P3;
+	Center.x = (P1.x + P2.x + P3.x) / 3;
+	Center.y = (P1.y + P2.y + P3.y) / 3;
 }
 
 
@@ -28,13 +30,28 @@ bool CTriangle::isPointInFigure(int x, int y)const
 
 CFigure * CTriangle::copy()
 {
-	return nullptr;
+	return new CTriangle(*this);
 }
 
 void CTriangle::Move(int x, int y)
 {
+	int deltaX = x - Center.x;
+	int deltaY = y - Center.y;
+	Corner1.x += deltaX;
+	Corner1.y += deltaY;
+	Corner2.x += deltaX;
+	Corner2.y += deltaY;
+	Corner3.x += deltaX;
+	Corner3.y += deltaY;
+	Center.x = (Corner1.x + Corner2.x + Corner3.x) / 3;
+	Center.y = (Corner1.y + Corner2.y + Corner3.y) / 3;
 }
 
 void CTriangle::Resize(float)
 {
+}
+
+Point CTriangle::getCenter() const
+{
+	return Center;
 }

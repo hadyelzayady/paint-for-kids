@@ -3,7 +3,7 @@
 #include "ColorRectangle.h"
 class ResizeAction : public Action
 {
-	const double options[4] = { .25,.5,2.4 };
+	const double options[4] = { .25,.5,2,4 };
 public:
 	ResizeAction(ApplicationManager* pApp);
 

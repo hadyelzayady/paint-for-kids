@@ -1,10 +1,10 @@
 #include "CCircle.h"
 #include <cmath>
-CCircle::CCircle(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo)
+CCircle::CCircle(Point Center, int Rad, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo)
 {
-	CircCent = P1;
+	CircCent = Center;
 	Center = CircCent;// remember to determine whicj one to use ,if I will use center in all figures replace CircCent with Center
-	Rad = (int)sqrt(pow(P1.x - P2.x, 2)+pow(P1.y-P2.y,2));
+	this->Rad = Rad;
 }
 
 

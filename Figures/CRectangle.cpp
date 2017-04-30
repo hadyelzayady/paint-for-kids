@@ -35,12 +35,12 @@ void CRectangle::Move(int newx, int newy)
 }
 void CRectangle::Resize(float resize)
 {
-	int width = Corner1.x - Corner1.x;
-	int height = Corner1.y - Corner1.y;
+	int width = Corner2.x - Corner1.x;
+	int height = Corner2.y - Corner1.y;
 	Corner2.x = Corner1.x + width*resize;
-	Corner2.y = (Corner1.y + Corner2.y)*resize;
+	Corner2.y = Corner1.y + height*resize;
 }
-CFigure * CRectangle::copy()
+CFigure * CRectangle::copy()	
 {
 	return new CRectangle(*this);
 }

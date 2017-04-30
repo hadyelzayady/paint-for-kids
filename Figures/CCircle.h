@@ -9,7 +9,7 @@ private:
 	Point CircCent;
 	int Rad;
 public:
-	CCircle(Point, Point, GfxInfo FigureGfxInfo);
+	CCircle(Point,int, GfxInfo FigureGfxInfo);
 	virtual void Draw(Output* pOut) const;
 	virtual bool isPointInFigure(int x, int y)const;
 	virtual void Move(int newx, int newy);

@@ -23,6 +23,9 @@ void Move::ReadActionParameters()
 			FigList[i]->Move(newx, newy);// move -> moves the figure center to newx,newy
 		}
 	}
+	pManager->refPoint.x = x;
+	pManager->refPoint.y = y;
+	pManager->GetOutput()->PrintMessage("Moved");
 	pManager->GetOutput()->ClearDrawArea();
 }
 

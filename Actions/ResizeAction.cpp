@@ -37,7 +37,7 @@ void ResizeAction::CreateResizePallete()const
 	pIn->GetPointClicked(clickX, clickY);
 	// getting option
 	int index = -1;// if no size clicked then this default value ,-1 -> no choose
-	if (clickY >UI.ToolBarHeight || clickY<y + height)
+	if (clickY >UI.ToolBarHeight && clickY<y + height)
 	{
 		int relativeDistance = clickX - x;// distance from most left of the resize image
 		index = relativeDistance /50;//50 is the width of resize option ; .25->50 px ...
