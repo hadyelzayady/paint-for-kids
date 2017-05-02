@@ -16,6 +16,7 @@
 #include "Actions\FillingAct.h"
 #include "Actions\Move.h"
 #include "Actions\ResizeAction.h"
+#include "Actions\ZoomIn.h"
 //Constructor
 ApplicationManager::ApplicationManager()
 {
@@ -95,6 +96,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			break;
 		case RESIZE:
 			pAct = new ResizeAction(this);
+			break;
+		case ZOOMIN:
+			pAct = new ZoomIn(this);
 			break;
 		case TO_PLAY:
 			pOut->PrintMessage("Play Mode");

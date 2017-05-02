@@ -66,6 +66,7 @@ ActionType Input::GetUserAction() const
 			case ITM_MOVE:return MOVE;
 			case ITM_DELETE:return DEL;
 			case ITM_RESIZE:return RESIZE;
+			case ITM_ZOOM_IN:return ZOOMIN;
 			case PLAYMODE:return TO_PLAY;
 			case ITM_FILL:return FILL;
 			case ITM_EXIT: return EXIT;
