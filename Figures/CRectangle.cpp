@@ -44,3 +44,8 @@ CFigure * CRectangle::copy()
 {
 	return new CRectangle(*this);
 }
+
+double CRectangle::getArea() const
+{
+	return abs((Corner2.x-Corner1.x)*(Corner2.y-Corner1.y));
+}

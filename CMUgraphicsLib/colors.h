@@ -7,7 +7,6 @@ This file was last modified on 05.16.1999
 #define COLORS_H
 
 #include "version.h"
-
 class color {
 
   public:
@@ -22,11 +21,17 @@ class color {
     unsigned char ucRed;
     unsigned char ucGreen;
     unsigned char ucBlue;
-
+	bool operator==(color b)
+	{
+		return (ucBlue == b.ucBlue && ucGreen == b.ucGreen && ucRed == b.ucRed);
+	}
+	bool operator!=(color b)
+	{
+		return !(*this == b);
+	}
 };
 
-bool operator==(color a, color b);
-bool operator!=(color a, color b);
+
 
 /*
 

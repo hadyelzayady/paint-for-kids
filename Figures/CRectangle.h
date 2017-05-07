@@ -15,6 +15,7 @@ public:
 	virtual void Move(int newx, int newy);
 	virtual void Resize(float resize);
 	virtual CFigure* copy();
+	virtual double getArea()const;
 };
 
 #endif

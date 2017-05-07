@@ -55,3 +55,8 @@ Point CTriangle::getCenter() const
 {
 	return Center;
 }
+
+double CTriangle::getArea() const
+{
+	return abs((Corner1.x*(Corner2.y - Corner3.y) + Corner2.x*(Corner3.y - Corner1.y) + Corner3.x*(Corner1.y - Corner2.y)) / 2.0);
+}

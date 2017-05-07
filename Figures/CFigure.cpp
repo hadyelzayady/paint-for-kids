@@ -23,6 +23,8 @@ Point CFigure::getCenter() const
 	return Center;
 }
 
+
+
 void CFigure::ChngDrawClr(color Dclr)
 {	FigGfxInfo.DrawClr = Dclr; }
 

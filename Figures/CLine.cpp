@@ -25,6 +25,10 @@ CFigure * CLine::copy()
 {
 	return new CLine(*this);
 }
+double CLine::getArea() const
+{
+	return sqrt( pow(End.x-Start.x,2) +pow(End.y-Start.y,2));
+}
 bool CLine::isPointInFigure(int x, int y)const
 {
 	float slope = (float)(Start.y - End.y) / (float)(Start.x - End.x);// line eq y=ax+b ;a->slope, b

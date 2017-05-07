@@ -19,6 +19,7 @@ public:
 	bool IsSelected() const;	//check whether fig is selected
 	void setCenter(int x,int y);
 	Point getCenter()const;
+	virtual double getArea()const=0;
 	virtual void Draw(Output* pOut) const  = 0 ;		//Draw the figure
 	virtual bool isPointInFigure(int x, int y)const=0;
 	void ChngDrawClr(color Dclr);	//changes the figure's drawing color

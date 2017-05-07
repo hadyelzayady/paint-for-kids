@@ -1,5 +1,6 @@
 #include "CCircle.h"
 #include <cmath>
+const double  pi = 3.141592653589793238463;
 CCircle::CCircle(Point Center, int Rad, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo)
 {
 	CircCent = Center;
@@ -33,4 +34,9 @@ void CCircle::Resize(float resize)
 CFigure * CCircle::copy()
 {
 	return new CCircle(*this);
+}
+
+double CCircle::getArea() const
+{
+	return pi*pow(Rad,2);
 }

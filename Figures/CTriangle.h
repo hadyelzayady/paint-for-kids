@@ -16,4 +16,5 @@ public:
 	virtual void Move(int x, int y);
 	virtual void Resize(float);
 	Point getCenter()const;
+	virtual double getArea()const;
 };
