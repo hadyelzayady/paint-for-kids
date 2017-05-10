@@ -101,6 +101,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			pAct = new ZoomIn(this);
 			break;
 		case TO_PLAY:
+			unselectAll();// unselect all selected figures
 			pOut->PrintMessage("Play Mode");
 			pOut->CreatePlayToolBar();
 			break;

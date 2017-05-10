@@ -8,10 +8,13 @@
 class PickAndHide : public Action
 {
 private:
-	Point P1, P2; //Rectangle Corners
-	GfxInfo RectGfxInfo;
 	const double options[4] = { 0,1,2,3 };
 	int PropType;
+	CFigure*hostFig;
+	int TotalvalidCount;
+	double max_area;
+	double min_area;
+	bool desc;
 public:
 	PickAndHide(ApplicationManager *pApp);
 
@@ -22,6 +25,8 @@ public:
 	//Add rectangle to the ApplicationManager
 	void hideFig(int x,int y);
 	virtual void Execute();
+	void setCountOfValid();
+	void setnextarea();
 
 };
 

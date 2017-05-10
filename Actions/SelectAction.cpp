@@ -39,7 +39,7 @@ void SelectAction::ReadActionParameters()
 		if (numOfSelected == 1)
 		{
 			// print fig info
-			pOut->PrintMessage("Fig Info");
+			pOut->PrintNumber(selectedFig->getArea());
 		}
 		else
 			pOut->PrintNumber(numOfSelected);
