@@ -1,5 +1,6 @@
 #include "CTriangle.h"
-
+#include <iomanip>
+#include <fstream>
 CTriangle::CTriangle(Point P1, Point P2,Point P3, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo)
 {
 	Corner1 = P1;
@@ -7,6 +8,10 @@ CTriangle::CTriangle(Point P1, Point P2,Point P3, GfxInfo FigureGfxInfo) :CFigur
 	Corner3 = P3;
 	Center.x = (P1.x + P2.x + P3.x) / 3;
 	Center.y = (P1.y + P2.y + P3.y) / 3;
+}
+
+CTriangle::CTriangle()
+{
 }
 
 
@@ -47,13 +52,26 @@ void CTriangle::Move(int x, int y)
 	Center.y = (Corner1.y + Corner2.y + Corner3.y) / 3;
 }
 
-void CTriangle::Resize(float)
+void CTriangle::Resize(float rs)
 {
+	
 }
 
 Point CTriangle::getCenter() const
 {
 	return Center;
+}
+
+void CTriangle::Save(ofstream & OutFile)
+{
+	int fillColorID = FigGfxInfo.isFilled ? FigGfxInfo.FillClr.getID() : -1;
+	OutFile << tri << setw(4) << ID << setw(8) << Corner1.x << setw(8) << Corner1.y << setw(8) << Corner2.x << setw(8) << Corner2.y
+		<< setw(8) << Corner3.x << setw(8) << Corner3.y <<setw(8)<<FigGfxInfo.DrawClr.getID()<<setw(8)<<fillColorID<< endl;
+}
+
+void CTriangle::Load(ifstream & Infile)
+{
+
 }
 
 double CTriangle::getArea() const

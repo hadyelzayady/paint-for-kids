@@ -22,7 +22,7 @@ Output::Output()
 	UI.BkGrndColor = LIGHTGOLDENRODYELLOW;	//Background color
 	UI.HighlightColor = MAGENTA;	//This color should NOT be used to draw figures. use if for highlight only
 	UI.StatusBarColor = TURQUOISE;
-	UI.PenWidth = 3;	//width of the figures frames
+	UI.PenWidth = 2;	//width of the figures frames
 
 	//Create the output window
 	pWind = CreateWind(UI.width, UI.height, UI.wx, UI.wy);
@@ -96,12 +96,12 @@ void Output::CreateDrawToolBar() const
 	MenuItemImages[ITM_DELETE] = "images\\MenuItems\\Menu_Delete.jpg";
 	MenuItemImages[ITM_MOVE] = "images\\MenuItems\\Move.jpg";
 	MenuItemImages[ITM_LOAD] = "images\\MenuItems\\Load.jpg";
+	MenuItemImages[ITM_CHANGEWIDTH] = "images\\MenuItems\\Menu_Line.jpg";
 	MenuItemImages[ITM_ZOOM_IN] = "images\\MenuItems\\ZoomIn.jpg";
 	MenuItemImages[ITM_ZOOM_OUT]= "images\\MenuItems\\ZoomOut.jpg";
 	MenuItemImages[ITM_SAVE] = "images\\MenuItems\\Save.jpg";
 	MenuItemImages[PLAYMODE] = "images\\MenuItems\\PlayMode.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\MenuItems\\Menu_Exit.jpg";
-
 	//TODO: Prepare images for each menu item and add it to the list
 
 	//Draw menu item one image at a time
@@ -292,6 +292,7 @@ void Output::DrawLine(Point P1, Point P2, GfxInfo LineGfxInfo, bool selected) co
 	pWind->DrawLine(P1.x, P1.y, P2.x, P2.y,style);
 
 }
+
 //////////////////////////////////////////////////////////////////////////////////////////
 Output::~Output()
 {

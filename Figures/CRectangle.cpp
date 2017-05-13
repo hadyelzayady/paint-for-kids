@@ -1,5 +1,7 @@
 #include "CRectangle.h"
 #include <cmath>
+#include <iomanip>
+#include <fstream>
 CRectangle::CRectangle(Point P1, Point P2, GfxInfo FigureGfxInfo):CFigure(FigureGfxInfo)
 {
 	Corner1 = P1.x < P2.x ? P1 : P2;
@@ -9,6 +11,10 @@ CRectangle::CRectangle(Point P1, Point P2, GfxInfo FigureGfxInfo):CFigure(Figure
 	int height = abs(P1.y - P2.y);
 	Center.x = min(P1.x, P2.x)+width/2;
 	Center.y = min(P1.y, P2.y) + height / 2;
+}
+
+CRectangle::CRectangle()
+{
 }
 	
 
@@ -43,6 +49,16 @@ void CRectangle::Resize(float resize)
 CFigure * CRectangle::copy()	
 {
 	return new CRectangle(*this);
+}
+
+void CRectangle::Save(ofstream & OutFile)
+{
+	int fillColorID = FigGfxInfo.isFilled ? FigGfxInfo.FillClr.getID() : -1;
+	OutFile << rect << setw(4) << ID << setw(8) << Corner1.x << setw(8) << Corner1.y << setw(8) << Corner2.x << setw(8) << Corner2.y <<setw(8)<<FigGfxInfo.DrawClr.getID()<<setw(8)<<fillColorID<< endl;
+}
+
+void CRectangle::Load(ifstream & Infile)
+{
 }
 
 double CRectangle::getArea() const

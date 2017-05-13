@@ -17,6 +17,11 @@
 #include "Actions\Move.h"
 #include "Actions\ResizeAction.h"
 #include "Actions\ZoomIn.h"
+#include "Actions\Save.h"
+#include "Actions\ChangeWidth.h"
+#include "Actions\Load.h"
+#include <fstream>
+using namespace std;
 //Constructor
 ApplicationManager::ApplicationManager()
 {
@@ -100,10 +105,19 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case ZOOMIN:
 			pAct = new ZoomIn(this);
 			break;
+		case SAVE:
+			pAct = new Save(this);
+			break;
+		case LOAD:
+			pAct = new Load(this);
+			break;
 		case TO_PLAY:
 			unselectAll();// unselect all selected figures
 			pOut->PrintMessage("Play Mode");
 			pOut->CreatePlayToolBar();
+			break;
+		case CHANGE_WIDTH:
+			pAct = new ChangeWidth(this);
 			break;
 		case EXIT:
 			break;
@@ -134,6 +148,24 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		delete pAct;	//Action is not needed any more ==> delete it
 		pAct = NULL;
 	}
+}
+void ApplicationManager::setColors(ifstream & file)
+{
+	int colorindex;
+	file >> colorindex;
+	UI.DrawColor = colors[colorindex];
+	file >> colorindex; 
+	UI.FillColor = colors[colorindex];
+	file >> colorindex; 
+	UI.BkGrndColor = colors[colorindex];
+}
+void ApplicationManager::deleteFigList()
+{
+	for (size_t i = 0; i <FigCount ; i++)
+	{
+		delete FigList[i];
+	}
+	FigCount = 0;
 }
 //==================================================================================//
 //						Figures Management Functions								//
@@ -187,6 +219,15 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const
 	///Add your code here to search for a figure given a point x,y	
 
 	return NULL;
+}
+int ApplicationManager::getcolorIndex(color cl)
+{
+	for (size_t i = 0; i < 144; i++)
+	{
+		if (cl == colors[i])
+			return i;
+	}
+	return 0;
 }
 //==================================================================================//
 //							Interface Management Functions							//

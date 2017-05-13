@@ -7,15 +7,19 @@ This file was last modified on 05.16.1999
 #define COLORS_H
 
 #include "version.h"
+static int IdD = 0;
 class color {
 
+	int ID=0;
   public:
-
     // Default constructor creates black
     color(unsigned char Red = 0, unsigned char Green = 0, unsigned char Blue = 0) { 
         ucRed = Red;  ucGreen = Green;  ucBlue = Blue; 
+		this->ID=IdD++;
     }
-
+	int getID() {
+		return ID;
+	}
 
     // Color components.  0 = no intensity, 255 = full intensity
     unsigned char ucRed;
@@ -30,7 +34,6 @@ class color {
 		return !(*this == b);
 	}
 };
-
 
 
 /*
@@ -189,3 +192,4 @@ const color LIGHTGREEN = color(144, 238, 144);
 
 
 #endif //COLOR_H
+

@@ -68,6 +68,7 @@ ActionType Input::GetUserAction() const
 			case ITM_RESIZE:return RESIZE;
 			case ITM_ZOOM_IN:return ZOOMIN;
 			case PLAYMODE:return TO_PLAY;
+			case ITM_CHANGEWIDTH:return CHANGE_WIDTH;
 			case ITM_FILL:return FILL;
 			case ITM_EXIT: return EXIT;
 			default: return EMPTY;	//A click on empty place in desgin toolbar

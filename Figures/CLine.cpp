@@ -1,10 +1,15 @@
 #include "CLine.h"
-
+#include <iomanip>
+#include <fstream>
 CLine::CLine(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo)
 {
 	Start = P1;
 	End = P2;
 	//Center=
+}
+
+CLine::CLine()
+{
 }
 
 
@@ -28,6 +33,13 @@ CFigure * CLine::copy()
 double CLine::getArea() const
 {
 	return sqrt( pow(End.x-Start.x,2) +pow(End.y-Start.y,2));
+}
+void CLine::Save(ofstream & OutFile)
+{
+	OutFile << lin << setw(4) << ID << setw(8) << Start.x << setw(8) << Start.y << setw(8) << End.x << setw(8) << End.y <<setw(8)<<FigGfxInfo.DrawClr.getID()<< endl;
+}
+void CLine::Load(ifstream & Infile)
+{
 }
 bool CLine::isPointInFigure(int x, int y)const
 {

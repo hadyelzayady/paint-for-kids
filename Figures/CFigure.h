@@ -13,8 +13,10 @@ protected:
 	GfxInfo FigGfxInfo;	//Figure graphis info
 	/// Add more parameters if needed.
 	Point Center;
+	static unsigned int IDcounter;
 public:
 	CFigure(GfxInfo FigureGfxInfo);
+	CFigure();
 	void SetSelected(bool s);	//select/unselect the figure
 	bool IsSelected() const;	//check whether fig is selected
 	void setCenter(int x,int y);
@@ -36,8 +38,8 @@ public:
 	virtual void Resize(float) = 0;	//Resize the figure
 	virtual void Move(int x,int y)=0 ;		//Move the figure
 
-	//virtual void Save(ofstream &OutFile) = 0;	//Save the figure parameters to the file
-	//virtual void Load(ifstream &Infile) = 0;	//Load the figure parameters to the file
+	virtual void Save(ofstream &OutFile) = 0;	//Save the figure parameters to the file
+	virtual void Load(ifstream &Infile) = 0;	//Load the figure parameters to the file
 
 	//virtual void PrintInfo(Output* pOut) = 0;	//print all figure info on the status bar
 };

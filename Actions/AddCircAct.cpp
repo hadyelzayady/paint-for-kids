@@ -19,12 +19,22 @@ void AddCircAction::ReadActionParameters()
 
 	//Read 1st corner and store in point P1
 	pIn->GetPointClicked(Center.x,Center.y);
-
+	while (Center.y<UI.ToolBarHeight || Center.y >UI.height - UI.StatusBarHeight)
+	{
+		pOut->PrintMessage("invalid position");
+		pIn->GetPointClicked(Center.x, Center.y);
+	}
 	pOut->PrintMessage("click at point to determine radius");
 
 	//Read 2nd corner and store in point P2
 	pIn->GetPointClicked(P1.x, P1.y);
-
+	int Rad = (int)sqrt(pow(Center.x - P1.x, 2) + pow(Center.y - P1.y, 2));
+	while (P1.y<UI.ToolBarHeight || P1.y > UI.height - UI.StatusBarHeight || Center.y-Rad <UI.ToolBarHeight || Center.y+Rad >UI.height - UI.StatusBarHeight || Center.x-Rad<0 || Center.x+Rad>UI.width)
+	{
+		pOut->PrintMessage("invalid position");
+		pIn->GetPointClicked(P1.x, P1.y);
+		Rad = (int)sqrt(pow(Center.x - P1.x, 2) + pow(Center.y - P1.y, 2));
+	}
 	CircGfxInfo.isFilled = pManager->isFilled;	//default is not filled
 									//get drawing, filling colors and pen width from the interface
 	CircGfxInfo.DrawClr = pOut->getCrntDrawColor();

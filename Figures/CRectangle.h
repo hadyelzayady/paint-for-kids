@@ -10,11 +10,14 @@ private:
 	Point Corner2;
 public:
 	CRectangle(Point , Point, GfxInfo FigureGfxInfo );
+	CRectangle();
 	virtual void Draw(Output* pOut) const;
 	virtual bool isPointInFigure(int x, int y)const;
 	virtual void Move(int newx, int newy);
 	virtual void Resize(float resize);
 	virtual CFigure* copy();
+	void Save(ofstream &OutFile);
+	void Load(ifstream &Infile);
 	virtual double getArea()const;
 };
 
