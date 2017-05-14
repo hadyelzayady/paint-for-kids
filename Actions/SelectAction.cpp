@@ -14,14 +14,14 @@ void SelectAction::ReadActionParameters()
 	Input* pIn = pManager->GetInput();
 	pOut->PrintMessage("Select Figure(s)...");
 	int x, y;
-	while (true)
+	while (pIn->GetPointClicked(x, y)==LEFT_CLICK)
 	{
-		pIn->GetPointClicked(x, y);
+
 		if (y < UI.ToolBarHeight)// user clicks on icons to make action on selected figures ;selected figures still selected
 			return;
 		CFigure* selectedFig = pManager->GetFigure(x, y);
 		if (selectedFig == NULL)// if clicks on empty space on drawing area ->unselect all
-			return;
+			continue;
 		bool Selected = selectedFig->IsSelected();
 		selectedFig->SetSelected(!Selected);
 		//selectedFig->chngIsFilled(pManager->isFilled);

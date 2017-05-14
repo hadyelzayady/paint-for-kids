@@ -17,7 +17,10 @@ void ResizeAction::changeAllSelected(float resize) const
 	{
 		if (FigList[i]->IsSelected())
 		{
-			FigList[i]->Resize(resize);
+			if (!FigList[i]->Resize(resize))
+			{
+				recover(1/resize,i);
+			}
 		}
 
 	}
@@ -53,4 +56,17 @@ void ResizeAction::CreateResizePallete()const
 void ResizeAction::Execute()
 {
 	CreateResizePallete();
+}
+
+void ResizeAction::recover(double resize,int lastelemindex)const
+{
+	pManager->GetOutput()->PrintMessage("beyond boundries");
+	CFigure** FigList = pManager->getFigList();
+	for (size_t i = 0; i <= lastelemindex; i++)
+	{
+		if (FigList[i]->IsSelected())
+		{
+			FigList[i]->Resize(resize);
+		}
+	}
 }

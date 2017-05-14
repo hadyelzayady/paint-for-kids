@@ -13,8 +13,8 @@ public:
 	CLine();
 	virtual bool isPointInFigure(int x, int y)const;
 	virtual void Draw(Output* pOut) const;
-	virtual void Move(int newx, int newy);
-	virtual void Resize(float);
+	virtual bool Move(int newx, int newy);
+	virtual bool Resize(float);
 	virtual CFigure* copy();
 	virtual double getArea()const;
 	void Save(ofstream &OutFile);

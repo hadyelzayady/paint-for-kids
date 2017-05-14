@@ -13,8 +13,8 @@ public:
 	CRectangle();
 	virtual void Draw(Output* pOut) const;
 	virtual bool isPointInFigure(int x, int y)const;
-	virtual void Move(int newx, int newy);
-	virtual void Resize(float resize);
+	virtual bool Move(int newx, int newy);
+	virtual bool Resize(float resize);
 	virtual CFigure* copy();
 	void Save(ofstream &OutFile);
 	void Load(ifstream &Infile);

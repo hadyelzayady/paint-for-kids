@@ -38,7 +38,7 @@ CFigure * CTriangle::copy()
 	return new CTriangle(*this);
 }
 
-void CTriangle::Move(int x, int y)
+bool CTriangle::Move(int x, int y)
 {
 	int deltaX = x - Center.x;
 	int deltaY = y - Center.y;
@@ -50,11 +50,12 @@ void CTriangle::Move(int x, int y)
 	Corner3.y += deltaY;
 	Center.x = (Corner1.x + Corner2.x + Corner3.x) / 3;
 	Center.y = (Corner1.y + Corner2.y + Corner3.y) / 3;
+	return true;
 }
 
-void CTriangle::Resize(float rs)
+bool CTriangle::Resize(float rs)
 {
-	
+	return true;
 }
 
 Point CTriangle::getCenter() const
@@ -64,14 +65,20 @@ Point CTriangle::getCenter() const
 
 void CTriangle::Save(ofstream & OutFile)
 {
-	int fillColorID = FigGfxInfo.isFilled ? FigGfxInfo.FillClr.getID() : -1;
+	int fillColorindex = FigGfxInfo.isFilled ? getcolorIndex(FigGfxInfo.FillClr) : -1;
 	OutFile << tri << setw(4) << ID << setw(8) << Corner1.x << setw(8) << Corner1.y << setw(8) << Corner2.x << setw(8) << Corner2.y
-		<< setw(8) << Corner3.x << setw(8) << Corner3.y <<setw(8)<<FigGfxInfo.DrawClr.getID()<<setw(8)<<fillColorID<< endl;
+		<< setw(8) << Corner3.x << setw(8) << Corner3.y <<setw(8)<<getcolorIndex(FigGfxInfo.DrawClr)<<setw(8)<<fillColorindex<<setw(8)<<FigGfxInfo.BorderWdth <<endl;
 }
 
 void CTriangle::Load(ifstream & Infile)
 {
-
+	int colorindex;
+	Infile >> ID >> Corner1.x >> Corner1.y >> Corner2.x >> Corner2.y >> Corner3.x >> Corner3.y >> colorindex;
+	FigGfxInfo.DrawClr = colors[colorindex];
+	Infile>>colorindex;
+	FigGfxInfo.FillClr = colorindex != -1 ? colors[colorindex] : UI.FillColor;
+	FigGfxInfo.isFilled = colorindex != -1 ? true : false;
+	Infile >> FigGfxInfo.BorderWdth;
 }
 
 double CTriangle::getArea() const

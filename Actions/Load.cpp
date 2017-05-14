@@ -56,6 +56,5 @@ void Load::Execute()
 		fig->Load(file);
 		pManager->AddFigure(fig);
 	}
-	//pOut->ClearDrawArea();
-	//pManager->UpdateInterface();
+	pOut->ClearDrawArea();
 }

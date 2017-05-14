@@ -106,9 +106,11 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			pAct = new ZoomIn(this);
 			break;
 		case SAVE:
+			unselectAll();
 			pAct = new Save(this);
 			break;
 		case LOAD:
+			unselectAll();
 			pAct = new Load(this);
 			break;
 		case TO_PLAY:

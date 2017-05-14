@@ -29,7 +29,7 @@ void AddCircAction::ReadActionParameters()
 	//Read 2nd corner and store in point P2
 	pIn->GetPointClicked(P1.x, P1.y);
 	int Rad = (int)sqrt(pow(Center.x - P1.x, 2) + pow(Center.y - P1.y, 2));
-	while (P1.y<UI.ToolBarHeight || P1.y > UI.height - UI.StatusBarHeight || Center.y-Rad <UI.ToolBarHeight || Center.y+Rad >UI.height - UI.StatusBarHeight || Center.x-Rad<0 || Center.x+Rad>UI.width)
+	while (Center.y-Rad <UI.ToolBarHeight || Center.y+Rad >UI.height - UI.StatusBarHeight || Center.x-Rad<0 || Center.x+Rad>UI.width)
 	{
 		pOut->PrintMessage("invalid position");
 		pIn->GetPointClicked(P1.x, P1.y);

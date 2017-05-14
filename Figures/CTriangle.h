@@ -14,8 +14,8 @@ public:
 	virtual void Draw(Output* pOut) const;
 	virtual bool isPointInFigure(int x, int y)const;
 	virtual CFigure* copy();
-	virtual void Move(int x, int y);
-	virtual void Resize(float);
+	virtual bool Move(int x, int y);
+	virtual bool Resize(float);
 	Point getCenter()const;
 	void Save(ofstream &OutFile);
 	void Load(ifstream &Infile);

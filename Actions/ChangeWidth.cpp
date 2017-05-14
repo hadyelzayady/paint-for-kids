@@ -16,7 +16,7 @@ void ChangeWidth::changeAllSelected() const
 	for (size_t i = 0; i < count; i++)
 	{
 		if (FigList[i]->IsSelected())
-			FigList[i]->ChngDrawClr(UI.DrawColor);
+			FigList[i]->chngBorderWidth(UI.PenWidth);
 	}
 }
 void ChangeWidth::Execute()
@@ -28,6 +28,6 @@ void ChangeWidth::Execute()
 	if (!isselected)
 		return;
 	UI.PenWidth = widthsWin.getWidth();
-//	changeAllSelected();
+	changeAllSelected();
 	widthsWin.closeRect();
 }

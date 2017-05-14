@@ -16,7 +16,15 @@ void CFigure::SetSelected(bool s)
 
 bool CFigure::IsSelected() const
 {	return Selected; }
-
+int CFigure::getcolorIndex(color cl)
+{
+	for (size_t i = 0; i < 144; i++)
+	{
+		if (cl == colors[i])
+			return i;
+	}
+	return 0;
+}
 void CFigure::setCenter(int x,int y)
 {
 	Center.x = x;
@@ -42,6 +50,11 @@ void CFigure::ChngFillClr(color Fclr)
 void CFigure::chngIsFilled(bool isfilled)
 {
 	FigGfxInfo.isFilled = isfilled;
+}
+
+void CFigure::chngBorderWidth(int wid)
+{
+	FigGfxInfo.BorderWdth = wid;
 }
 
 GfxInfo CFigure::getGfxInfo() const

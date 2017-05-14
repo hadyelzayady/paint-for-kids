@@ -18,12 +18,21 @@ void AddLineAction::ReadActionParameters()
 	pOut->PrintMessage("New Line: Click at start point");
 	//Read 1st corner and store in point P1
 	pIn->GetPointClicked(P1.x, P1.y);
+	while (P1.y<UI.ToolBarHeight || P1.y >UI.height - UI.StatusBarHeight)
+	{
+		pOut->PrintMessage("invalid position");
+		pIn->GetPointClicked(P1.x, P1.y);
+	}
 	///////////////////////////////////////////////////////////////////
 	pOut->PrintMessage("New Line: Click at end point ,right click for filled");
 	//Read 2nd corner and store in point P2
 	clicktype clk = pIn->GetPointClicked(P2.x, P2.y);
-
-	LineGfxInfo.isFilled =pManager->isFilled;	//default is not filled
+	while (P2.y<UI.ToolBarHeight || P2.y >UI.height - UI.StatusBarHeight)
+	{
+		pOut->PrintMessage("invalid position");
+		pIn->GetPointClicked(P2.x, P2.y);
+	}
+	LineGfxInfo.isFilled =false;	//default is not filled
 									//get drawing, filling colors and pen width from the interface
 	LineGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	LineGfxInfo.FillClr = pOut->getCrntFillColor();

@@ -12,6 +12,7 @@ public:
 	void changeAllSelected(float resize)const;
 	//Add Line to the ApplicationManager
 	virtual void Execute();
+	void recover(double resize,int lastelemindex)const;
 	void CreateResizePallete()const;
 	~ResizeAction();
 };

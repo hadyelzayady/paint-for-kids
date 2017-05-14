@@ -29,22 +29,34 @@ bool CRectangle::isPointInFigure(int x, int y)const
 	return !((Corner1.x - x)*(x - Corner2.x) < 0 || (Corner1.y - y)*(y - Corner2.y) < 0); // eqation of rectangle= sqrt( (a-x)*(x-c) ) * sqrt( (b-y)*(y-d) ) ; where corners are (a,b) (c,d)
 }
 
-void CRectangle::Move(int newx, int newy)
+bool CRectangle::Move(int newx, int newy)
 {
 	int deltaX = newx - Center.x;
 	int deltaY = newy - Center.y;
+
+	Point CCorner1 = Corner1;
+	CCorner1.x += deltaX;
+	CCorner1.y += deltaY;
+	Point CCorner2 = Corner2;
+	CCorner2.x += deltaX;
+	CCorner2.y += deltaY;
+	if (CCorner2.x > UI.width || CCorner1.x < 0 || CCorner1.y <UI.ToolBarHeight || CCorner2.y >UI.height - UI.ToolBarHeight)
+		return false;
 	Center = { newx,newy };
-	Corner1.x += deltaX;
-	Corner1.y += deltaY;
-	Corner2.x += deltaX;
-	Corner2.y += deltaY;
+	Corner1 = CCorner1;
+	Corner2 = CCorner2;
+	return true;
 }
-void CRectangle::Resize(float resize)
+bool CRectangle::Resize(float resize)
 {
 	int width = Corner2.x - Corner1.x;
 	int height = Corner2.y - Corner1.y;
 	Corner2.x = Corner1.x + width*resize;
 	Corner2.y = Corner1.y + height*resize;
+	if (Corner2.x > UI.width || Corner1.x < 0 || Corner1.y <UI.ToolBarHeight || Corner2.y >UI.height - UI.ToolBarHeight)
+		return false;
+	return true;
+
 }
 CFigure * CRectangle::copy()	
 {
@@ -53,12 +65,19 @@ CFigure * CRectangle::copy()
 
 void CRectangle::Save(ofstream & OutFile)
 {
-	int fillColorID = FigGfxInfo.isFilled ? FigGfxInfo.FillClr.getID() : -1;
-	OutFile << rect << setw(4) << ID << setw(8) << Corner1.x << setw(8) << Corner1.y << setw(8) << Corner2.x << setw(8) << Corner2.y <<setw(8)<<FigGfxInfo.DrawClr.getID()<<setw(8)<<fillColorID<< endl;
+	int fillColorindex = FigGfxInfo.isFilled ? getcolorIndex(FigGfxInfo.FillClr) : -1;
+	OutFile << rect << setw(4) << ID << setw(8) << Corner1.x << setw(8) << Corner1.y << setw(8) << Corner2.x << setw(8) << Corner2.y <<setw(8)<<getcolorIndex(FigGfxInfo.DrawClr)<<setw(8)<<fillColorindex<<setw(8)<<FigGfxInfo.BorderWdth<< endl;
 }
 
 void CRectangle::Load(ifstream & Infile)
 {
+	int colorindex;
+	Infile >> ID >> Corner1.x >> Corner1.y >> Corner2.x >> Corner2.y >> colorindex;
+	FigGfxInfo.DrawClr = colors[colorindex];
+	Infile >> colorindex;//fill
+	FigGfxInfo.FillClr = colorindex != -1 ? colors[colorindex] : UI.FillColor;
+	FigGfxInfo.isFilled = colorindex != -1 ? true : false;
+	Infile >> FigGfxInfo.BorderWdth;
 }
 
 double CRectangle::getArea() const
