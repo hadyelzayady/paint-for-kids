@@ -21,19 +21,29 @@ void AddLineAction::ReadActionParameters()
 	while (P1.y<UI.ToolBarHeight || P1.y >UI.height - UI.StatusBarHeight)
 	{
 		pOut->PrintMessage("invalid position");
-		pIn->GetPointClicked(P1.x, P1.y);
+		if (pIn->GetPointClicked(P1.x, P1.y) == RIGHT_CLICK)
+		{
+			pOut->PrintMessage("Action cancelled");
+			cancelAction = true;
+			return;
+		}
 	}
 	///////////////////////////////////////////////////////////////////
 	pOut->PrintMessage("New Line: Click at end point ,right click for filled");
 	//Read 2nd corner and store in point P2
 	clicktype clk = pIn->GetPointClicked(P2.x, P2.y);
+	pOut->PrintMessage("invalid position,click right click to cancel action");
 	while (P2.y<UI.ToolBarHeight || P2.y >UI.height - UI.StatusBarHeight)
 	{
-		pOut->PrintMessage("invalid position");
-		pIn->GetPointClicked(P2.x, P2.y);
+		if (pIn->GetPointClicked(P2.x, P2.y) == RIGHT_CLICK)
+		{
+			pOut->PrintMessage("Action cancelled");
+			cancelAction = true;
+			return;
+		}
 	}
 	LineGfxInfo.isFilled =false;	//default is not filled
-									//get drawing, filling colors and pen width from the interface
+	pOut->PrintMessage("Action done");									//get drawing, filling colors and pen width from the interface
 	LineGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	LineGfxInfo.FillClr = pOut->getCrntFillColor();
 	LineGfxInfo.BorderWdth = pOut->getCrntPenWidth();
@@ -45,7 +55,8 @@ void AddLineAction::Execute()
 {
 	//This action needs to read some parameters first
 	ReadActionParameters();
-
+	if (cancelAction)
+		return;
 	//Create a Line with the parameters read from the user
 	CLine *Line = new CLine(P1, P2,LineGfxInfo);
 

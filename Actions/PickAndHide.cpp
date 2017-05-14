@@ -39,7 +39,7 @@ void PickAndHide::setCountOfValid()
 
 	case 3:
 		setnextarea();
-		TotalvalidCount = pManager->getFigCount()-1;
+		TotalvalidCount = pManager->getFigCount();
 		return;
 
 	}
@@ -94,11 +94,12 @@ void PickAndHide::ReadActionParameters()
 	int validCount = 0;
 	int invalidCount = 0;
 	setCountOfValid();
-	if (TotalvalidCount == 0) {
+	if (TotalvalidCount == 1) {//host figure counted
 		pOut->PrintMessage("No Similar Figures exist !");
 		return;
 	}
 	hideFig(x, y);
+	TotalvalidCount--;;
 	switch (PropType)
 	{
 	case 0://figure type

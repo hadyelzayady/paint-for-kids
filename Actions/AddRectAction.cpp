@@ -19,11 +19,30 @@ void AddRectAction::ReadActionParameters()
 	
 	//Read 1st corner and store in point P1
 	pIn->GetPointClicked(P1.x, P1.y);
-
+	pOut->PrintMessage("invalid position,click right click to cancel action");
+	while (P1.y<UI.ToolBarHeight || P1.y >UI.height - UI.StatusBarHeight)
+	{
+		if (pIn->GetPointClicked(P1.x, P1.y) == RIGHT_CLICK)
+		{
+			pOut->PrintMessage("Action cancelled");
+			cancelAction = true;
+			return;
+		}
+	}
 	pOut->PrintMessage("New Rectangle: Click at second corner,right click for filled");
 
 	pIn->GetPointClicked(P2.x, P2.y);
-
+	pOut->PrintMessage("invalid position,click right click to cancel action");
+	while (P2.y<UI.ToolBarHeight || P2.y >UI.height - UI.StatusBarHeight)
+	{
+		if (pIn->GetPointClicked(P2.x, P2.y) == RIGHT_CLICK)
+		{
+			pOut->PrintMessage("Action cancelled");
+			cancelAction = true;
+			return;
+		}
+	}
+	pOut->PrintMessage("Action done");
 	RectGfxInfo.isFilled = pManager->isFilled;	//default is not filled
 	//get drawing, filling colors and pen width from the interface
 	RectGfxInfo.DrawClr = pOut->getCrntDrawColor();
@@ -39,7 +58,8 @@ void AddRectAction::Execute()
 {
 	//This action needs to read some parameters first
 	ReadActionParameters();
-	
+	if (cancelAction)
+		return;
 	//Create a rectangle with the parameters read from the user
 	CRectangle *R=new CRectangle(P1, P2, RectGfxInfo);
 

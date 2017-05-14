@@ -11,7 +11,7 @@ class Action
 {
 protected:
 	ApplicationManager *pManager;	//Actions needs AppMngr to do their job
-
+	bool cancelAction=false;
 public:
 	Action(ApplicationManager *pApp) { pManager = pApp; }	//constructor
 

@@ -29,14 +29,19 @@ void AddCircAction::ReadActionParameters()
 	//Read 2nd corner and store in point P2
 	pIn->GetPointClicked(P1.x, P1.y);
 	int Rad = (int)sqrt(pow(Center.x - P1.x, 2) + pow(Center.y - P1.y, 2));
+	pOut->PrintMessage("invalid position,click right click to cancel action");
 	while (Center.y-Rad <UI.ToolBarHeight || Center.y+Rad >UI.height - UI.StatusBarHeight || Center.x-Rad<0 || Center.x+Rad>UI.width)
 	{
-		pOut->PrintMessage("invalid position");
-		pIn->GetPointClicked(P1.x, P1.y);
+		if (pIn->GetPointClicked(P1.x, P1.y) == RIGHT_CLICK)
+		{
+			pOut->PrintMessage("Action cancelled");
+			cancelAction = true;
+			return;
+		}
 		Rad = (int)sqrt(pow(Center.x - P1.x, 2) + pow(Center.y - P1.y, 2));
 	}
 	CircGfxInfo.isFilled = pManager->isFilled;	//default is not filled
-									//get drawing, filling colors and pen width from the interface
+	pOut->PrintMessage("action done");							//get drawing, filling colors and pen width from the interface
 	CircGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	CircGfxInfo.FillClr = pOut->getCrntFillColor();
 	CircGfxInfo.BorderWdth = pOut->getCrntPenWidth();
@@ -50,7 +55,8 @@ void AddCircAction::Execute()
 {
 	//This action needs to read some parameters first
 	ReadActionParameters();
-
+	if (cancelAction)
+		return;
 	//Create a rectangle with the parameters read from the user
 	int Rad = (int)sqrt(pow(Center.x - P1.x, 2) + pow(Center.y - P1.y, 2));
 	CCircle *Circ = new CCircle(Center,Rad, CircGfxInfo);
