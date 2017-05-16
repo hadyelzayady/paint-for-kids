@@ -22,10 +22,10 @@ public:
 	virtual void Execute() =0;
 
 	//To undo this action (code depends on action type)
-	//virtual void Undo()=0;
+	virtual void Undo();//abstract
 
 	//To redo this action (code depends on action type)
-	//virtual void Redo()=0;
+	virtual void Redo();//abstarct
 
 };
 #endif

@@ -21,7 +21,39 @@
 #include "Actions\ChangeWidth.h"
 #include "Actions\Load.h"
 #include <fstream>
+#include "Actions\UndoAction.h"
 using namespace std;
+void ApplicationManager::pushAction(Action * ac)
+{
+	actions.push_front(ac);
+	if (actions.size() == 101)
+	{
+		ac=actions.back();
+		delete ac;
+		actions.pop_back();
+	}
+}
+Action* ApplicationManager::popAction()
+{
+	if (!actions.empty())
+	{
+		Action* ac = actions.front();
+		actions.pop_front();
+		return ac;
+	}
+	return NULL;
+
+}
+Action * ApplicationManager::RedoTop()
+{
+	if (!Redo.empty())
+	{
+		Action*ac = Redo.top();
+		Redo.pop();
+		return ac;
+	}
+	return NULL;
+}
 //Constructor
 ApplicationManager::ApplicationManager()
 {
@@ -113,6 +145,27 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			unselectAll();
 			pAct = new Load(this);
 			break;
+		case UNDO:
+		{
+			Action*ac = popAction();
+			if (ac != NULL)
+			{
+				Redo.push(ac);
+				ac->Undo();
+				pOut->ClearDrawArea();
+			}
+			break;
+		}
+		case REDO:
+		{
+			Action*ac =  RedoTop();
+			if (ac != NULL)
+			{
+				pushAction(ac);
+				ac->Redo();
+			}
+			break;
+		}
 		case TO_PLAY:
 			unselectAll();// unselect all selected figures
 			pOut->PrintMessage("Play Mode");
@@ -147,7 +200,6 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	if(pAct != NULL)
 	{
 		pAct->Execute();//Execute
-		delete pAct;	//Action is not needed any more ==> delete it
 		pAct = NULL;
 	}
 }
@@ -194,6 +246,19 @@ void ApplicationManager::DelFigure(CFigure* pFig,int index)
 	FigCount--;
 	FigList[index] = FigList[FigCount];
 	FigList[FigCount] = NULL;
+}
+void ApplicationManager::DelFigure(CFigure * pFig)
+{
+	for (size_t i = 0; i < FigCount; i++)
+	{
+		if (FigList[i] == pFig)
+		{
+			delete pFig;
+			FigCount--;
+			FigList[i] = FigList[FigCount];
+			FigList[FigCount] = NULL;
+		}
+	}
 }
 void ApplicationManager::deletecopied(vector<CFigure*>&arr)
 {

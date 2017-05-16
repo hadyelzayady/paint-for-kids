@@ -6,6 +6,9 @@
 #include "GUI\input.h"
 #include "GUI\output.h"
 #include <vector>
+#include <stack>
+#include <deque>
+#include "Actions\Action.h"
 //Main class that manages everything in the application.
 class ApplicationManager
 {
@@ -17,7 +20,13 @@ private:
 	//Pointers to Input and Output classes
 	Input *pIn;
 	Output *pOut;
+	deque<Action*>actions;
+	stack<Action*> Redo;
 public:	
+	void pushAction(Action*ac);
+	Action* popAction();
+	Action* RedoTop();
+	//stack<Action*>undoed;
 	bool isFilled;
 	ApplicationManager();
 	vector<CFigure*> copied;
@@ -43,6 +52,7 @@ public:
 	// -- Figures Management Functions
 	void AddFigure(CFigure* pFig); //Adds a new figure to the FigList
 	void DelFigure(CFigure* pFig,int index);
+	void DelFigure(CFigure* pFig);
 	void setFigCount(int n);
 	CFigure *GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
 	int getcolorIndex(color cl);

@@ -39,6 +39,8 @@ enum ActionType //The actions supported (you can add more if needed)
 	ZOOMIN,
 	ZOOMOUT,
 	///TODO: Add more action types (if needed)
+	UNDO,
+	REDO,
 };
 enum Type {
 	rect,

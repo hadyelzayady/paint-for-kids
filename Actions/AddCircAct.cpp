@@ -59,7 +59,21 @@ void AddCircAction::Execute()
 		return;
 	//Create a rectangle with the parameters read from the user
 	int Rad = (int)sqrt(pow(Center.x - P1.x, 2) + pow(Center.y - P1.y, 2));
-	CCircle *Circ = new CCircle(Center,Rad, CircGfxInfo);
+	Circ = new CCircle(Center,Rad, CircGfxInfo);
+	//Add the rectangle to the list of figures
+	pManager->AddFigure(Circ);
+	pManager->pushAction(this);
+}
+
+void AddCircAction::Undo()
+{
+	pManager->DelFigure(Circ);
+}
+
+void AddCircAction::Redo()
+{
+	int Rad = (int)sqrt(pow(Center.x - P1.x, 2) + pow(Center.y - P1.y, 2));
+	Circ = new CCircle(Center, Rad, CircGfxInfo);
 	//Add the rectangle to the list of figures
 	pManager->AddFigure(Circ);
 }
