@@ -22,7 +22,7 @@ void Move::ReadActionParameters()
 				int newy = y + FigList[i]->getCenter().y - pManager->refPoint.y;
 				if (!FigList[i]->Move(newx, newy))// move -> moves the figure center to newx,newy
 				{
-					pManager->GetOutput()->PrintMessage("Invalid position");
+					pManager->GetOutput()->PrintMessage("Invalid position,click rigth click to exit action");
 					recover(i);
 					x = pManager->refPoint.x;// to not change refpoint if moving canceled
 					y = pManager->refPoint.y;// to not change refpoint if moving canceled
@@ -34,8 +34,9 @@ void Move::ReadActionParameters()
 		pManager->UpdateInterface();
 		pManager->refPoint.x = x;
 		pManager->refPoint.y = y;
-		pManager->GetOutput()->PrintMessage("Moved");
 	}
+
+	pManager->GetOutput()->PrintMessage("moving finished");
 
 }
 

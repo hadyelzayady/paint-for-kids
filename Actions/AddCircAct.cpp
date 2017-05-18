@@ -62,7 +62,6 @@ void AddCircAction::Execute()
 	Circ = new CCircle(Center,Rad, CircGfxInfo);
 	//Add the rectangle to the list of figures
 	pManager->AddFigure(Circ);
-	pManager->pushAction(this);
 }
 
 void AddCircAction::Undo()

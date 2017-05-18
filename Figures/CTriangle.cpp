@@ -42,19 +42,64 @@ bool CTriangle::Move(int x, int y)
 {
 	int deltaX = x - Center.x;
 	int deltaY = y - Center.y;
-	Corner1.x += deltaX;
-	Corner1.y += deltaY;
-	Corner2.x += deltaX;
-	Corner2.y += deltaY;
-	Corner3.x += deltaX;
-	Corner3.y += deltaY;
+	Point CCorner1 = Corner1;
+	CCorner1.x += deltaX;
+	CCorner1.y += deltaY;
+	Point CCorner2 = Corner2;
+	CCorner2.x += deltaX;
+	CCorner2.y += deltaY;
+	Point CCorner3 = Corner3;
+	CCorner3.x += deltaX;
+	CCorner3.y += deltaY;
+	if (CCorner1.x > UI.width || CCorner2.x > UI.width || CCorner3.x > UI.width || CCorner1.x < 0 || CCorner2.x < 0 || CCorner3.x < 0 || CCorner1.y <UI.ToolBarHeight || CCorner2.y <UI.ToolBarHeight|| CCorner3.y <UI.ToolBarHeight || CCorner1.y >UI.height - UI.ToolBarHeight || CCorner2.y >UI.height - UI.ToolBarHeight || CCorner3.y >UI.height - UI.ToolBarHeight)
+		return false;
+	Corner1 = CCorner1;
+	Corner2 = CCorner2;
+	Corner3 = CCorner3;
 	Center.x = (Corner1.x + Corner2.x + Corner3.x) / 3;
 	Center.y = (Corner1.y + Corner2.y + Corner3.y) / 3;
 	return true;
 }
-
+bool operator==(Point const& lhs, Point const& rhs)
+{
+	return lhs.x == rhs.x && lhs.y == rhs.y;
+}
 bool CTriangle::Resize(float rs)
 {
+	//get minx point
+	Point* central = Corner1.x < Corner2.x ? &Corner1 : &Corner2;
+	Point* P1 = *central == Corner1 ? &Corner2 : &Corner1;
+	Point* P2 = Corner3.x > central->x ? &Corner3 : central;
+	central = Corner3.x < central->x ? &Corner3 : central;
+	Point P1new,P2new;
+	//
+	//get next P1;
+	double vx = P1->x - central->x;
+	double vy = P1->y - central->y;
+	double length = sqrt(vx*vx + vy*vy);
+	double addedDist = length*rs - length;
+	//get unit vector vx,vy
+	vx /= length;
+	vy /= length;
+	//addedDist = rs < 1 ? -1 * addedDist : addedDist;
+	P1new.x = P1->x + vx*addedDist;
+	P1new.y = P1->y+vy*addedDist;
+	//get next P2;
+	vx = P2->x - central->x;
+	vy = P2->y - central->y;
+	length = sqrt(vx*vx+vy*vy);
+	addedDist = length*rs - length;
+	//get unit vector 
+	vx /= length;
+	vy /= length;
+	//addedDist = rs < 1 ? -1 * addedDist : addedDist;
+	P2new.x = P2->x + vx*addedDist;
+	P2new.y = P2->y + vy*addedDist;
+	//
+	*P2 = P2new;
+	*P1 = P1new;
+	if (P1new.x > UI.width || P2new.x > UI.width || P1new.x < 0 || P2new.x < 0 || P1new.y <UI.ToolBarHeight || P2new.y <UI.ToolBarHeight || P1new.y >UI.height - UI.ToolBarHeight || P2new.y >UI.height - UI.ToolBarHeight)
+		return false;
 	return true;
 }
 

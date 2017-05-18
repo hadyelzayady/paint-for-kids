@@ -4,6 +4,8 @@
 class ChangeBKColor : public Action
 {
 	ColorRectangle colorsWin;
+	color oldColor;
+	color ActColor;
 public:
 	ChangeBKColor(ApplicationManager* pApp);
 
@@ -12,6 +14,8 @@ public:
 
 	//Add Line to the ApplicationManager
 	virtual void Execute();
+	void Undo();
+	void Redo();
 	~ChangeBKColor();
 };
 

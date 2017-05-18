@@ -50,6 +50,7 @@ enum Type {
 };
 struct Point	//To be used for figures points
 { int x,y; };
+
 const color colors[144] = { SNOW,
 GHOSTWHITE,
 WHITESMOKE,

@@ -4,6 +4,8 @@
 class ChangeDrawColor : public Action
 {
 	ColorRectangle colorsWin;
+	color oldColor;
+	color ActColor;
 public:
 	ChangeDrawColor(ApplicationManager* pApp);
 
@@ -12,6 +14,8 @@ public:
 	void changeAllSelected()const;
 	//Add Line to the ApplicationManager
 	virtual void Execute();
+	void Undo();
+	void Redo();
 	~ChangeDrawColor();
 };
 

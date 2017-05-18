@@ -200,6 +200,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	if(pAct != NULL)
 	{
 		pAct->Execute();//Execute
+		if(!dynamic_cast<Save*>(pAct) || !dynamic_cast<Load*>(pAct))pushAction(pAct);
 		pAct = NULL;
 	}
 }
