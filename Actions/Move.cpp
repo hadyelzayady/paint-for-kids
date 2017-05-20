@@ -5,7 +5,7 @@
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 #include <vector>
-Move::Move(ApplicationManager * pApp) :Action(pApp)
+Move::Move(ApplicationManager * pApp) :Action(pApp),refPoint(pManager->refPoint)
 {}
 void Move::ReadActionParameters()
 {
@@ -28,6 +28,7 @@ void Move::ReadActionParameters()
 					y = pManager->refPoint.y;// to not change refpoint if moving canceled
 					break;
 				}
+				MovedFig.push_back(FigList[i]);
 			}
 		}
 		pManager->GetOutput()->ClearDrawArea();
@@ -50,6 +51,7 @@ void Move::recover(int lastindex)
 			int newx = FigList[i]->getCenter().x - (x - pManager->refPoint.x);//get the new shifted center of copied figures
 			int newy = FigList[i]->getCenter().y - (y - pManager->refPoint.y);
 			FigList[i]->Move(newx, newy);
+			MovedFig.pop_back();
 		}
 	}
 }
@@ -58,4 +60,18 @@ void Move::recover(int lastindex)
 void Move::Execute()
 {
 	ReadActionParameters();
+}
+
+void Move::Undo()
+{
+	for (int i = 0; i < MovedFig.size(); i++)
+	{
+		int newx = MovedFig[i]->getCenter().x - (x - refPoint.x);//get the new shifted center of copied figures
+		int newy = MovedFig[i]->getCenter().y - (y - refPoint.y);
+		MovedFig[i]->Move(newx, newy);
+	}
+}
+
+void Move::Redo()
+{
 }

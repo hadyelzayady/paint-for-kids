@@ -20,6 +20,7 @@ void ResizeAction::changeAllSelected(float resize) const
 			if (!FigList[i]->Resize(resize))
 			{
 				recover(1/resize,i);
+				break;
 			}
 		}
 
