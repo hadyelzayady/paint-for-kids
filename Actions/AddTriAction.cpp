@@ -21,7 +21,7 @@ void AddTriAction:: ReadActionParameters()
 	while (P1.y<UI.ToolBarHeight || P1.y >UI.height - UI.StatusBarHeight)
 	{
 		pOut->PrintMessage("invalid position");
-		if (pIn->GetPointClicked(P2.x, P2.y) == RIGHT_CLICK)
+		if (pIn->GetPointClicked(P1.x, P1.y) == RIGHT_CLICK)
 		{
 			pOut->PrintMessage("Action cancelled");
 			cancelAction = true;
@@ -47,9 +47,9 @@ void AddTriAction:: ReadActionParameters()
 	//Read 3rd corner and store in point P3
 	pIn->GetPointClicked(P3.x, P3.y);
 	pOut->PrintMessage("invalid position,click right click to cancel action");
-	while (P2.y<UI.ToolBarHeight || P2.y >UI.height - UI.StatusBarHeight)
+	while (P3.y<UI.ToolBarHeight || P3.y >UI.height - UI.StatusBarHeight)
 	{
-		if (pIn->GetPointClicked(P2.x, P2.y) == RIGHT_CLICK)
+		if (pIn->GetPointClicked(P3.x, P3.y) == RIGHT_CLICK)
 		{
 			pOut->PrintMessage("Action cancelled");
 			cancelAction = true;

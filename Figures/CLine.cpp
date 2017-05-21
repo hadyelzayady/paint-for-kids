@@ -1,6 +1,7 @@
 #include "CLine.h"
 #include <iomanip>
 #include <fstream>
+#include <sstream>
 CLine::CLine(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo)
 {
 	Start = P1.x <P2.x ? P1:P2;
@@ -66,6 +67,14 @@ void CLine::Load(ifstream & Infile)
 	FigGfxInfo.DrawClr = colors[colorindex];
 	Infile >> FigGfxInfo.BorderWdth;
 	FigGfxInfo.isFilled = false;
+	Center.x = (Start.x + End.x) / 2;
+	Center.y = (Start.y + End.y) / 2;
+}
+void CLine::PrintInfo(Output * pOut)
+{
+	ostringstream oss;
+	oss << "ID:" << ID << "\t Start:(" << Start.x << "," << Start.y << ")  End:(" <<End.x <<","<<End.y<< ")  Area:" << getArea();
+	pOut->PrintMessage(oss.str());
 }
 bool CLine::isPointInFigure(int x, int y)const
 {

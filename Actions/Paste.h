@@ -11,7 +11,7 @@ public:
 	//Reads rectangle parameters
 	static int numOfSelected; //
 	virtual void ReadActionParameters();
-
+	void recover(int i);
 	//Add rectangle to the ApplicationManager
 	virtual void Execute();
 

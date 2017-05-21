@@ -18,6 +18,7 @@ public:
 	virtual CFigure* copy();
 	void Save(ofstream &OutFile);
 	void Load(ifstream &Infile);
+	virtual void PrintInfo(Output* pOut);	//print all figure info on the status bar
 	virtual double getArea()const;
 };
 

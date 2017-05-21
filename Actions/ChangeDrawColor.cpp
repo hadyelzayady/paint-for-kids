@@ -8,15 +8,20 @@ void ChangeDrawColor::ReadActionParameters()
 {
 
 }
-void ChangeDrawColor::changeAllSelected() const
+int ChangeDrawColor::changeAllSelected(color c) const
 {
 	CFigure** FigList = pManager->getFigList();
 	size_t count = pManager->getFigCount();
+	int numOfSelec = 0;
 	for (size_t i = 0; i < count; i++)
 	{
 		if (FigList[i]->IsSelected())
-			FigList[i]->ChngDrawClr(UI.DrawColor);
+		{
+			FigList[i]->ChngDrawClr(c);
+			numOfSelec++;
+		}
 	}
+	return numOfSelec;
 }
 void ChangeDrawColor::Execute()
 {
@@ -26,8 +31,9 @@ void ChangeDrawColor::Execute()
 	colorsWin.closeRect();
 	if (!isselected)
 		return;
-	UI.DrawColor = colorsWin.getcolor();
-	changeAllSelected();
+	color c = colorsWin.getcolor();
+	if(changeAllSelected(c)==0)
+		UI.DrawColor = c;
 	colorsWin.closeRect();
 }
 

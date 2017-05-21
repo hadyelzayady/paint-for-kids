@@ -4,6 +4,7 @@
 
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
+#include <vector>
 int SelectAction::numOfSelected = 0;
 SelectAction::SelectAction(ApplicationManager * pApp) :Action(pApp)
 {}
@@ -14,6 +15,7 @@ void SelectAction::ReadActionParameters()
 	Input* pIn = pManager->GetInput();
 	pOut->PrintMessage("Select Figure(s)...");
 	int x, y;
+	vector <CFigure*> selected;
 	while (pIn->GetPointClicked(x, y)==LEFT_CLICK)
 	{
 
@@ -24,22 +26,25 @@ void SelectAction::ReadActionParameters()
 			continue;
 		bool Selected = selectedFig->IsSelected();
 		selectedFig->SetSelected(!Selected);
-		//selectedFig->chngIsFilled(pManager->isFilled);
 		selectedFig->Draw(pOut);
 		Selected=!Selected ;//
 		if (Selected)// e
 		{
+			selected.push_back(selectedFig);
 			numOfSelected++;
 
 		}
 		else// 
 		{
 			numOfSelected--;
+		    vector<CFigure*>::iterator it= find(selected.begin(), selected.end(), selectedFig);
+			*it = selected.at(selected.size() - 1);
+			selected.pop_back();
 		}
 		if (numOfSelected == 1)
 		{
 			// print fig info
-			pOut->PrintNumber(selectedFig->getArea());
+			selected.at(0)->PrintInfo(pOut);
 		}
 		else
 			pOut->PrintNumber(numOfSelected);

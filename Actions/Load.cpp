@@ -25,9 +25,12 @@ void Load::ReadActionParameters()
 //Execute the action
 void Load::Execute()
 {
-	ifstream file;
 	ReadActionParameters();
-	file.open(filename);
+	ifstream file(filename);
+	if(!file.good()){
+		pManager->GetOutput()->PrintMessage("no file exist");
+		return;
+	}
 	Output*pOut = pManager->GetOutput();
 	pManager->deleteFigList();
 	pManager->setColors(file);

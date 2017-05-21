@@ -1,6 +1,7 @@
 #include "CTriangle.h"
 #include <iomanip>
 #include <fstream>
+#include <sstream>
 CTriangle::CTriangle(Point P1, Point P2,Point P3, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo)
 {
 	Corner1 = P1;
@@ -124,9 +125,18 @@ void CTriangle::Load(ifstream & Infile)
 	FigGfxInfo.FillClr = colorindex != -1 ? colors[colorindex] : UI.FillColor;
 	FigGfxInfo.isFilled = colorindex != -1 ? true : false;
 	Infile >> FigGfxInfo.BorderWdth;
+	Center.x = (Corner1.x + Corner2.x + Corner3.x) / 3;
+	Center.y = (Corner1.y + Corner2.y + Corner3.y) / 3;
 }
 
 double CTriangle::getArea() const
 {
 	return abs((Corner1.x*(Corner2.y - Corner3.y) + Corner2.x*(Corner3.y - Corner1.y) + Corner3.x*(Corner1.y - Corner2.y)) / 2.0);
+}
+
+void CTriangle::PrintInfo(Output * pOut)
+{
+	ostringstream oss;
+	oss << "ID:" << ID << "\t Corner1:(" << Corner1.x << "," << Corner1.y << ")  Corner2:(" << Corner2.x << "," << Corner2.y << ")  Corner3:(" << Corner3.x << "," << Corner3.y << ")  Area:" << getArea();
+	pOut->PrintMessage(oss.str());
 }

@@ -20,4 +20,5 @@ public:
 	void Save(ofstream &OutFile);
 	void Load(ifstream &Infile);
 	virtual double getArea()const;
+	virtual void PrintInfo(Output* pOut);	//print all figure info on the status bar
 };

@@ -1,6 +1,9 @@
 #include "CCircle.h"
 #include <cmath>
 #include <fstream>
+#include <iostream>
+#include <sstream>
+using namespace std;
 const double  pi = 3.141592653589793238463;
 CCircle::CCircle(Point Centerpt, int Rad, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo)
 {
@@ -67,4 +70,11 @@ void CCircle::Load(ifstream & Infile)
 	FigGfxInfo.isFilled = Fillindex == -1 ? false : true;
 	Infile >> FigGfxInfo.BorderWdth;
 
+}
+
+void CCircle::PrintInfo(Output * pOut)
+{
+	ostringstream oss;
+	oss<< "ID:" << ID << "\t Center:(" << Center.x << "," << Center.y << ")  Rad:" << Rad << "  Area:" << getArea();
+	pOut->PrintMessage(oss.str());
 }

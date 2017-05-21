@@ -21,7 +21,7 @@ void Cut::Execute()
 	pManager->deletecopied(copiedArr);// remember to delete cutted figures
 	size_t numOfCopied = 0;
 	int minx = UI.width;// to get the fig with min x as my reference to for pasting later
-	Point &refPointPaste = pManager->refPoint = { UI.width,0 };// to determine the min x and take it as my ref
+	Point &refPointPaste = pManager->refPointPaste = { UI.width,0 };// to determine the min x and take it as my ref
 	for (int i = 0; i < pManager->getFigCount(); i++)
 	{
 		if (FigList[i]->IsSelected())
@@ -29,7 +29,7 @@ void Cut::Execute()
 			CFigure*newFig = FigList[i]->copy();
 			copiedArr.push_back(newFig);
 			numOfCopied++;
-			pManager->refPointPaste = FigList[i]->getCenter().x < refPointPaste.x ? FigList[i]->getCenter() : refPointPaste;
+			refPointPaste = FigList[i]->getCenter().x < refPointPaste.x ? FigList[i]->getCenter() : refPointPaste;
 			//remove the fig from figlist
 			pManager->DelFigure(FigList[i], i);
 			i--;// to check the fig that moved from end of figlist to the new pos

@@ -27,6 +27,7 @@ void ChangeWidth::Execute()
 	widthsWin.closeRect();
 	if (!isselected)
 		return;
+	pManager->GetOutput()->PrintMessage("width changed");
 	UI.PenWidth = widthsWin.getWidth();
 	changeAllSelected();
 	widthsWin.closeRect();

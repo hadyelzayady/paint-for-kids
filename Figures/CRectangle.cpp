@@ -2,6 +2,7 @@
 #include <cmath>
 #include <iomanip>
 #include <fstream>
+#include <sstream>
 CRectangle::CRectangle(Point P1, Point P2, GfxInfo FigureGfxInfo):CFigure(FigureGfxInfo)
 {
 	Corner1 = P1.x < P2.x ? P1 : P2;
@@ -78,6 +79,19 @@ void CRectangle::Load(ifstream & Infile)
 	FigGfxInfo.FillClr = colorindex != -1 ? colors[colorindex] : UI.FillColor;
 	FigGfxInfo.isFilled = colorindex != -1 ? true : false;
 	Infile >> FigGfxInfo.BorderWdth;
+	//get the center
+	int width = abs(Corner1.x - Corner2.x);
+	int height = abs(Corner1.y - Corner2.y);
+	Center.x = min(Corner1.x, Corner2.x) + width / 2;
+	Center.y = min(Corner1.y, Corner2.y) + height / 2;
+}
+
+void CRectangle::PrintInfo(Output * pOut)
+{
+	ostringstream oss;
+	oss << "ID:" << ID << "\t Corner1:(" << Corner1.x << "," << Corner1.y << ")  Corner2:(" << Corner2.x <<","<<Corner2.y <<")  Area:" << getArea()<<" Height: "
+		<<abs(Corner1.y-Corner2.y)<<" Width:"<<abs(Corner1.x-Corner2.x);
+	pOut->PrintMessage(oss.str());
 }
 
 double CRectangle::getArea() const

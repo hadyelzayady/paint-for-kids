@@ -9,6 +9,7 @@ CFigure::CFigure(GfxInfo FigureGfxInfo)
 
 CFigure::CFigure()
 {
+	Selected = false;
 }
 
 void CFigure::SetSelected(bool s)
@@ -24,6 +25,9 @@ int CFigure::getcolorIndex(color cl)
 			return i;
 	}
 	return 0;
+}
+void CFigure::PrintInfo(Output * pOut)
+{
 }
 void CFigure::setCenter(int x,int y)
 {

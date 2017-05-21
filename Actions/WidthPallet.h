@@ -3,8 +3,8 @@
 class WidthPallet : public Action
 {
 	Point P1, P2; //color window Corners(rectangle); second corner is known
-	const int width =100;// rectangle of one color
-	const int height = 32;
+	const int width =150;// rectangle of one color
+	const int height = 100;
 	int chosenwidth;
 	int x, y;// pos of clicked color
 public:
