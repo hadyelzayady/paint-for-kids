@@ -54,6 +54,13 @@ Action * ApplicationManager::RedoTop()
 	}
 	return NULL;
 }
+void ApplicationManager::destruct(Action * ac)
+{
+	for (size_t i = 0; i < destrList.size(); i++)
+	{
+		delete destrList.at(i);
+	}
+}
 //Constructor
 ApplicationManager::ApplicationManager()
 {
@@ -114,6 +121,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			pAct = new ChangeBKColor(this);
 			break;
 		case SELECT:
+			unselectAll();
 			pAct = new SelectAction(this);
 			break;
 		case MOVE:
@@ -163,6 +171,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			{
 				pushAction(ac);
 				ac->Redo();
+				pOut->ClearDrawArea();
 			}
 			break;
 		}
@@ -199,8 +208,11 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	//Execute the created action
 	if(pAct != NULL)
 	{
-		pAct->Execute();//Execute
-		if(!dynamic_cast<Save*>(pAct) || !dynamic_cast<Load*>(pAct))pushAction(pAct);
+		if (!dynamic_cast<Save*>(pAct) && !dynamic_cast<Load*>(pAct) && !dynamic_cast<SelectAction*>(pAct))// push first to be able to pop the action f it is cancelled
+			pushAction(pAct);
+		pAct->Execute();//Execute// if exectute return true then action works well
+		if (dynamic_cast<Save*>(pAct) || dynamic_cast<Load*>(pAct) || dynamic_cast<SelectAction*>(pAct))
+			delete pAct;
 		pAct = NULL;
 	}
 }
@@ -255,6 +267,24 @@ void ApplicationManager::DelFigure(CFigure * pFig)
 		if (FigList[i] == pFig)
 		{
 			delete pFig;
+			FigCount--;
+			FigList[i] = FigList[FigCount];
+			FigList[FigCount] = NULL;
+		}
+	}
+}
+void ApplicationManager::removeFigFromList(int i)
+{
+	FigCount--;
+	FigList[i] = FigList[FigCount];
+	FigList[FigCount] = NULL;
+}
+void ApplicationManager::removeFigFromList(CFigure * fig)
+{
+	for (size_t i = 0; i < FigCount; i++)
+	{
+		if (FigList[i] ==fig)
+		{
 			FigCount--;
 			FigList[i] = FigList[FigCount];
 			FigList[FigCount] = NULL;
@@ -322,5 +352,13 @@ ApplicationManager::~ApplicationManager()
 		delete FigList[i];
 	delete pIn;
 	delete pOut;
-	
+	for (size_t i = 0; i < actions.size(); i++)
+	{
+		delete actions[i];
+	}
+	for (size_t i = 0; i < Redo.size(); i++)
+	{
+		delete Redo.top();
+		Redo.pop();
+	}
 }

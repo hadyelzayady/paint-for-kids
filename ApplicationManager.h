@@ -22,10 +22,12 @@ private:
 	Output *pOut;
 	deque<Action*>actions;
 	stack<Action*> Redo;
+	vector<Action*>destrList;
 public:	
 	void pushAction(Action*ac);
 	Action* popAction();
 	Action* RedoTop();
+	void destruct(Action*ac);
 	//stack<Action*>undoed;
 	bool isFilled;
 	ApplicationManager();
@@ -53,6 +55,8 @@ public:
 	void AddFigure(CFigure* pFig); //Adds a new figure to the FigList
 	void DelFigure(CFigure* pFig,int index);
 	void DelFigure(CFigure* pFig);
+	void removeFigFromList(int i);
+	void removeFigFromList(CFigure*fig);
 	void setFigCount(int n);
 	CFigure *GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
 	int getcolorIndex(color cl);

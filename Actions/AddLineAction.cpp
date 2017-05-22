@@ -39,6 +39,7 @@ void AddLineAction::ReadActionParameters()
 		{
 			pOut->PrintMessage("Action cancelled");
 			cancelAction = true;
+			pManager->popAction();
 			return;
 		}
 	}
@@ -58,9 +59,21 @@ void AddLineAction::Execute()
 	if (cancelAction)
 		return;
 	//Create a Line with the parameters read from the user
-	CLine *Line = new CLine(P1, P2,LineGfxInfo);
+	Line = new CLine(P1, P2,LineGfxInfo);
 
 	//Add the Line to the list of figures
+	pManager->AddFigure(Line);
+}
+
+void AddLineAction::Undo()
+{
+	pManager->DelFigure(Line);
+}
+
+void AddLineAction::Redo()
+{
+	Line = new CLine(P1, P2, LineGfxInfo);
+	//Add the rectangle to the list of figures
 	pManager->AddFigure(Line);
 }
 

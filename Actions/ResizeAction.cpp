@@ -8,7 +8,7 @@ void ResizeAction::ReadActionParameters()
 {
 
 }
-void ResizeAction::changeAllSelected(float resize) const
+void ResizeAction::changeAllSelected()
 {
 	pManager->GetOutput()->PrintMessage("resize");
 	CFigure** FigList = pManager->getFigList();
@@ -17,9 +17,12 @@ void ResizeAction::changeAllSelected(float resize) const
 	{
 		if (FigList[i]->IsSelected())
 		{
+			ResizedList.push_back(FigList[i]);
 			if (!FigList[i]->Resize(resize))
 			{
-				recover(1/resize,i);
+				Undo();
+				pManager->GetOutput()->PrintMessage("beyond boundries");
+				//pManager->destruct(pManager->popAction());
 				break;
 			}
 		}
@@ -28,7 +31,7 @@ void ResizeAction::changeAllSelected(float resize) const
 	pManager->GetOutput()->ClearDrawArea();
 	
 }
-void ResizeAction::CreateResizePallete()const
+void ResizeAction::CreateResizePallete()
 {
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
@@ -51,12 +54,31 @@ void ResizeAction::CreateResizePallete()const
 
 	if (index >= 4 || index == -1)
 		return;
-	changeAllSelected(this->options[index]);
+	resize = options[index];
+	changeAllSelected();
 
+}
+void ResizeAction::Undo()
+{
+	for (size_t i = 0; i < ResizedList.size(); i++)
+	{
+			ResizedList[i]->Resize(1/resize);
+	}
+	pManager->GetOutput()->ClearDrawArea();
+
+}
+void ResizeAction::Redo()
+{
+	for (size_t i = 0; i < ResizedList.size(); i++)
+	{
+		ResizedList[i]->Resize(resize);
+	}
+	pManager->GetOutput()->ClearDrawArea();
 }
 void ResizeAction::Execute()
 {
 	CreateResizePallete();
+
 }
 
 void ResizeAction::recover(double resize,int lastelemindex)const

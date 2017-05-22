@@ -9,15 +9,17 @@ void ChangeWidth::ReadActionParameters()
 {
 
 }
-void ChangeWidth::changeAllSelected() const
+bool ChangeWidth::changeAllSelected(int width) const
 {
 	CFigure** FigList = pManager->getFigList();
 	size_t count = pManager->getFigCount();
-	for (size_t i = 0; i < count; i++)
+	size_t i;
+	for (i = 0; i < count; i++)
 	{
 		if (FigList[i]->IsSelected())
-			FigList[i]->chngBorderWidth(UI.PenWidth);
+			FigList[i]->chngBorderWidth(width);
 	}
+	return i == 0 ? false : true;
 }
 void ChangeWidth::Execute()
 {
@@ -28,7 +30,15 @@ void ChangeWidth::Execute()
 	if (!isselected)
 		return;
 	pManager->GetOutput()->PrintMessage("width changed");
-	UI.PenWidth = widthsWin.getWidth();
-	changeAllSelected();
+	if (!changeAllSelected(widthsWin.getWidth()))
+		UI.PenWidth = widthsWin.getWidth();
 	widthsWin.closeRect();
+}
+
+void ChangeWidth::Undo()
+{
+}
+
+void ChangeWidth::Redo()
+{
 }

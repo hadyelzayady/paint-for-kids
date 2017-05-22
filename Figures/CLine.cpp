@@ -31,7 +31,7 @@ bool CLine::Move(int newx, int newy)
 	EEnd.x += deltax;
 	EEnd.y += deltay;
 
-	if (EEnd.x> UI.width || EEnd.y <UI.ToolBarHeight || EEnd.y > UI.height - UI.StatusBarHeight || SStart.x<0 || SStart.y <UI.ToolBarHeight || SStart.y > UI.height - UI.StatusBarHeight)
+	if (EEnd.x> UI.width-15 || EEnd.y <UI.ToolBarHeight || EEnd.y > UI.height - UI.StatusBarHeight || SStart.x<0 || SStart.y <UI.ToolBarHeight || SStart.y > UI.height - UI.StatusBarHeight)
 		return false;
 	End = EEnd;
 	Start = SStart;
@@ -44,7 +44,7 @@ bool CLine::Resize(float resize)
 	int tempx, tempy;
 	End.x=Start.x + (End.x-Start.x ) * resize;
 	End.y =Start.y+ (End.y - Start.y)*resize;
-	if (End.x> UI.width || End.y <UI.ToolBarHeight || End.y > UI.height - UI.StatusBarHeight)
+	if (End.x> UI.width-15 || End.y <UI.ToolBarHeight || End.y > UI.height - UI.StatusBarHeight)
 		return false;
 	return true;
 }

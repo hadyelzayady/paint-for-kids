@@ -41,7 +41,7 @@ bool CRectangle::Move(int newx, int newy)
 	Point CCorner2 = Corner2;
 	CCorner2.x += deltaX;
 	CCorner2.y += deltaY;
-	if (CCorner2.x > UI.width || CCorner1.x < 0 || CCorner1.y <UI.ToolBarHeight || CCorner2.y >UI.height - UI.ToolBarHeight)
+	if (CCorner2.x > UI.width-15 || CCorner1.x < 0 || CCorner1.y <UI.ToolBarHeight || CCorner2.y >UI.height - UI.ToolBarHeight)
 		return false;
 	Center = { newx,newy };
 	Corner1 = CCorner1;
@@ -54,7 +54,7 @@ bool CRectangle::Resize(float resize)
 	int height = Corner2.y - Corner1.y;
 	Corner2.x = Corner1.x + width*resize;
 	Corner2.y = Corner1.y + height*resize;
-	if (Corner2.x > UI.width || Corner1.x < 0 || Corner1.y <UI.ToolBarHeight || Corner2.y >UI.height - UI.ToolBarHeight)
+	if (Corner2.x > UI.width-15 || Corner1.x < 0 || Corner1.y <UI.ToolBarHeight || Corner2.y >UI.height - UI.ToolBarHeight)
 		return false;
 	return true;
 

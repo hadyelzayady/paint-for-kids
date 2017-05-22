@@ -9,22 +9,27 @@ void ChangeFillColor::ReadActionParameters()
 {
 
 }
-int ChangeFillColor::changeAllSelected(color c) const
+bool ChangeFillColor::changeAllSelected(color c) const
 {
 	CFigure** FigList = pManager->getFigList();
 	size_t count = pManager->getFigCount();
-	int numOfSelect=0;
-	for (size_t i = 0; i < count; i++)
+	size_t i;
+	for (i = 0; i < count; i++)
 	{
 		if (FigList[i]->IsSelected())
 		{
 			if (FigList[i]->getGfxInfo().isFilled==true)
 				FigList[i]->ChngFillClr(c);
-			numOfSelect++;
 		}
 
 	}
-	return numOfSelect;
+	return i == 0 ? false : true;
+}
+void ChangeFillColor::Undo()
+{
+}
+void ChangeFillColor::Redo()
+{
 }
 void ChangeFillColor::Execute()
 {
@@ -34,7 +39,7 @@ void ChangeFillColor::Execute()
 	colorsWin.closeRect();
 	if (!isselected)
 		return;
-	if (changeAllSelected(colorsWin.getcolor())==0)
+	if (!changeAllSelected(colorsWin.getcolor()))
 		UI.FillColor = colorsWin.getcolor();
 	colorsWin.closeRect();
 }

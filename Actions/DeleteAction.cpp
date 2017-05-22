@@ -20,7 +20,8 @@ void DeleteAction::Execute()
 	{
 		if (FigList[i]->IsSelected())
 		{
-			pManager->DelFigure(FigList[i], i);
+			DeletedList.push_back(FigList[i]);
+			pManager->removeFigFromList(i);
 			FigCount--;
 			i--;
 		}
@@ -29,6 +30,22 @@ void DeleteAction::Execute()
 	pManager->GetOutput()->ClearDrawArea();
 }
 
+void DeleteAction::Undo()
+{
+	for (size_t i = 0; i < DeletedList.size(); i++)
+	{
+		pManager->AddFigure(DeletedList[i]);
+	}
+}
+
+
+void DeleteAction::Redo()
+{
+	for (size_t i = 0; i < DeletedList.size(); i++)
+	{
+		pManager->removeFigFromList(DeletedList[i]);
+	}
+}
 
 DeleteAction::~DeleteAction()
 {

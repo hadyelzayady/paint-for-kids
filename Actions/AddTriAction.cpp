@@ -73,12 +73,25 @@ void AddTriAction::Execute()
 	if (cancelAction)
 		return;
 	//Create a Triangle with the parameters read from the user
-	CTriangle *Tri = new CTriangle(P1, P2,P3,TriGfxInfo);
+	Tri = new CTriangle(P1, P2,P3,TriGfxInfo);
 
 	//Add the Triangle to the list of figures
 	pManager->AddFigure(Tri);
 }
 
+void AddTriAction::Undo()
+{
+	pManager->DelFigure(Tri);
+}
+
+
+void AddTriAction::Redo()
+{
+	Tri = new CTriangle(P1, P2,P3 ,TriGfxInfo);
+	//Add the rectangle to the list of figures
+	pManager->AddFigure(Tri);
+
+}
 
 AddTriAction::~AddTriAction()
 {

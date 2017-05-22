@@ -16,6 +16,7 @@ void Copy::ReadActionParameters()
 //Execute the action
 void Copy::Execute()
 {
+	pManager->popAction();
 	pManager->GetOutput()->PrintMessage("Copyed");
 	CFigure** FigList = pManager->getFigList();
 	int FigCount = pManager->getFigCount();

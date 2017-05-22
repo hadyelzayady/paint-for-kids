@@ -61,8 +61,20 @@ void AddRectAction::Execute()
 	if (cancelAction)
 		return;
 	//Create a rectangle with the parameters read from the user
-	CRectangle *R=new CRectangle(P1, P2, RectGfxInfo);
+	Rect=new CRectangle(P1, P2, RectGfxInfo);
 
 	//Add the rectangle to the list of figures
-	pManager->AddFigure(R);
+	pManager->AddFigure(Rect);
+}
+
+void AddRectAction::Undo()
+{
+	pManager->DelFigure(Rect);
+}
+
+void AddRectAction::Redo()
+{
+	Rect= new CRectangle(P1, P2, RectGfxInfo);
+	//Add the rectangle to the list of figures
+	pManager->AddFigure(Rect);
 }

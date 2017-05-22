@@ -38,3 +38,11 @@ void FillingAct::Execute()
 		pManager->GetOutput()->drawImg(UI.MenuItemWidth*ITM_FILL, 0, UI.MenuItemWidth, UI.ToolBarHeight, "images\\MenuItems\\UnFill.jpg");
 	changeAllSelected();
 }
+
+void FillingAct::Undo()
+{
+}
+
+void FillingAct::Redo()
+{
+}

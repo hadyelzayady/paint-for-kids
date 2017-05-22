@@ -13,7 +13,9 @@ public:
 
 	//Add Line to the ApplicationManager
 	virtual void Execute();
-	int changeAllSelected(color c)const;
+	bool changeAllSelected(color c)const;
+	void Undo();
+	void Redo();
 	~ChangeFillColor();
 };
 

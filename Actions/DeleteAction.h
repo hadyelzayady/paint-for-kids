@@ -1,7 +1,10 @@
 #pragma once
 #include "Action.h"
+#include <vector>
+#include "../Figures/CFigure.h"
 class DeleteAction : public Action
 {
+	vector<CFigure*> DeletedList;
 public:
 	DeleteAction(ApplicationManager* pApp);
 
@@ -10,6 +13,8 @@ public:
 
 	//Add Line to the ApplicationManager
 	virtual void Execute();
+	void Undo();
+	void Redo();
 	~DeleteAction();
 };
 

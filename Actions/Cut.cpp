@@ -27,15 +27,33 @@ void Cut::Execute()
 		if (FigList[i]->IsSelected())
 		{
 			CFigure*newFig = FigList[i]->copy();
+			CutList.push_back(FigList[i]);
 			copiedArr.push_back(newFig);
 			numOfCopied++;
 			refPointPaste = FigList[i]->getCenter().x < refPointPaste.x ? FigList[i]->getCenter() : refPointPaste;
 			//remove the fig from figlist
-			pManager->DelFigure(FigList[i], i);
+			
+			pManager->removeFigFromList(i);
 			i--;// to check the fig that moved from end of figlist to the new pos
 		}
 
 	}
 	copiedArr.resize(numOfCopied);
 	pManager->GetOutput()->ClearDrawArea();
+}
+
+void Cut::Undo()
+{
+	for (size_t i = 0; i < CutList.size(); i++)
+	{
+		pManager->AddFigure(CutList[i]);
+	}
+}
+
+void Cut::Redo()
+{
+	for (size_t i = 0; i < CutList.size(); i++)
+	{
+		pManager->removeFigFromList(CutList[i]);
+	}
 }

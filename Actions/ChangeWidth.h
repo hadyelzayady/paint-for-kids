@@ -9,9 +9,11 @@ public:
 
 	//Reads Line parameters
 	virtual void ReadActionParameters();
-	void changeAllSelected()const;
+	bool changeAllSelected(int width)const;
 	//Add Line to the ApplicationManager
 	virtual void Execute();
+	void Undo();
+	void Redo();
 	~ChangeWidth();
 };
 

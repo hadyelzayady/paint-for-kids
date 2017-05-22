@@ -29,7 +29,7 @@ bool CCircle::isPointInFigure(int x, int y)const
 
 bool CCircle::Move(int newx, int newy)
 {
-	if (newx - Rad <0 || newy + Rad >UI.height - UI.StatusBarHeight || newx + Rad>UI.width || newy - Rad<UI.ToolBarHeight)
+	if (newx - Rad <0 || newy + Rad >UI.height - UI.StatusBarHeight || newx + Rad>UI.width-15 || newy - Rad<UI.ToolBarHeight)
 		return false;
 	Center.x = newx;
 	Center.y = newy;
@@ -39,7 +39,7 @@ bool CCircle::Move(int newx, int newy)
 bool CCircle::Resize(float resize)
 {
 	Rad*= resize;
-	if (Center.y - Rad <UI.ToolBarHeight || Center.y + Rad >UI.height - UI.StatusBarHeight || Center.x - Rad<0 || Center.x + Rad>UI.width)
+	if (Center.y - Rad <UI.ToolBarHeight || Center.y + Rad >UI.height - UI.StatusBarHeight || Center.x - Rad<0 || Center.x + Rad>UI.width-15)
 		return false;
 	return true;
 }

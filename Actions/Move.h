@@ -7,15 +7,16 @@
 //Add Rectangle Action class
 class Move : public Action
 {
-	int x, y;
+	Point oldrefPoint;
 	vector<CFigure*> MovedFig;
 	Point refPoint;
+	int x, y;
 public:
 	Move(ApplicationManager *pApp);
 	//Reads rectangle parameters
 	static int numOfSelected; //
 	virtual void ReadActionParameters();
-	void recover(int lastindex);
+	void recover(Point,Point,int last);
 	//Add rectangle to the ApplicationManager
 	virtual void Execute();
 	void Undo();

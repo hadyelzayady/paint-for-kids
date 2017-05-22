@@ -22,6 +22,7 @@ void SelectAction::ReadActionParameters()
 		if (y < UI.ToolBarHeight)// user clicks on icons to make action on selected figures ;selected figures still selected
 			return;
 		CFigure* selectedFig = pManager->GetFigure(x, y);
+		pOut->PrintNumber(x);
 		if (selectedFig == NULL)// if clicks on empty space on drawing area ->unselect all
 			continue;
 		bool Selected = selectedFig->IsSelected();

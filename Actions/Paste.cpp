@@ -50,3 +50,11 @@ void Paste::Execute()
 	ReadActionParameters();
 
 }
+
+void Paste::Undo()
+{
+}
+
+void Paste::Redo()
+{
+}

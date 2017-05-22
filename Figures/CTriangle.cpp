@@ -52,7 +52,7 @@ bool CTriangle::Move(int x, int y)
 	Point CCorner3 = Corner3;
 	CCorner3.x += deltaX;
 	CCorner3.y += deltaY;
-	if (CCorner1.x > UI.width || CCorner2.x > UI.width || CCorner3.x > UI.width || CCorner1.x < 0 || CCorner2.x < 0 || CCorner3.x < 0 || CCorner1.y <UI.ToolBarHeight || CCorner2.y <UI.ToolBarHeight|| CCorner3.y <UI.ToolBarHeight || CCorner1.y >UI.height - UI.ToolBarHeight || CCorner2.y >UI.height - UI.ToolBarHeight || CCorner3.y >UI.height - UI.ToolBarHeight)
+	if (CCorner1.x > UI.width-15 || CCorner2.x > UI.width-15 || CCorner3.x > UI.width-15 || CCorner1.x < 0 || CCorner2.x < 0 || CCorner3.x < 0 || CCorner1.y <UI.ToolBarHeight || CCorner2.y <UI.ToolBarHeight|| CCorner3.y <UI.ToolBarHeight || CCorner1.y >UI.height - UI.ToolBarHeight || CCorner2.y >UI.height - UI.ToolBarHeight || CCorner3.y >UI.height - UI.ToolBarHeight)
 		return false;
 	Corner1 = CCorner1;
 	Corner2 = CCorner2;
@@ -99,7 +99,7 @@ bool CTriangle::Resize(float rs)
 	//
 	*P2 = P2new;
 	*P1 = P1new;
-	if (P1new.x > UI.width || P2new.x > UI.width || P1new.x < 0 || P2new.x < 0 || P1new.y <UI.ToolBarHeight || P2new.y <UI.ToolBarHeight || P1new.y >UI.height - UI.ToolBarHeight || P2new.y >UI.height - UI.ToolBarHeight)
+	if (P1new.x > UI.width-15 || P2new.x > UI.width-15 || P1new.x < 0 || P2new.x < 0 || P1new.y <UI.ToolBarHeight || P2new.y <UI.ToolBarHeight || P1new.y >UI.height - UI.ToolBarHeight || P2new.y >UI.height - UI.ToolBarHeight)
 		return false;
 	return true;
 }

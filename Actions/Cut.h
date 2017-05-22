@@ -2,10 +2,12 @@
 #define Cut_ACTION_H
 
 #include "Action.h"
-
+#include <vector>
+#include "../Figures/CFigure.h"
 //Add Rectangle Action class
 class Cut : public Action
 {
+	vector<CFigure*> CutList;
 public:
 	Cut(ApplicationManager *pApp);
 	//Reads rectangle parameters
@@ -14,7 +16,8 @@ public:
 
 	//Add rectangle to the ApplicationManager
 	virtual void Execute();
-
+	void Undo();
+	void Redo();
 };
 
 #endif
