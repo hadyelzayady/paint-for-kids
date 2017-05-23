@@ -23,27 +23,44 @@ void Move::ReadActionParameters()
 		}
 	}
 	//
-	while (pManager->GetInput()->GetPointClicked(x, y) == LEFT_CLICK)
-	{
-		for (int i = 0; i < MovedFig.size(); i++)
+	while (pManager->GetInput()->GetButtonState(x, y) == BUTTON_UP) {
+		if (pManager->GetInput()->GetMouseFromBuffer(x, y) == RIGHT_CLICK)//action cancelled
 		{
-			int newx = MovedFig[i]->getCenter().x + x - pManager->refPoint.x;//get the new shifted center of copied figures
-			int newy = MovedFig[i]->getCenter().y + y - pManager->refPoint.y;
-			if (!MovedFig[i]->Move(newx, newy))// move -> moves the figure center to newx,newy
+			pManager->popAction();
+			return;
+		}
+	}
+	int xold=-10, yold=-10;
+	while (pManager->GetInput()->GetButtonState(x, y) == BUTTON_DOWN)
+	{
+		if (x != xold && y != yold)// if there is a change in mouse position
+		{
+			for (int i = 0; i < MovedFig.size(); i++)
+			{
+				int newx = MovedFig[i]->getCenter().x + x - pManager->refPoint.x;//get the new shifted center of copied figures
+				int newy = MovedFig[i]->getCenter().y + y - pManager->refPoint.y;
+				if (!MovedFig[i]->Move(newx, newy))// move -> moves the figure center to newx,newy
 				{
 					pManager->GetOutput()->PrintMessage("Invalid position,click rigth click to exit action");
 					Point temprefPoint = { x,y };
 					Point tempoldrefPoint = pManager->refPoint;
-					recover(tempoldrefPoint,temprefPoint,i);
+					recover(tempoldrefPoint, temprefPoint, i);
 					x = pManager->refPoint.x;// to not change refpoint if moving canceled
 					y = pManager->refPoint.y;// to not change refpoint if moving canceled
 					break;
 				}
+			}
+
+			pManager->refPoint.x = x;// for moving more than once in one action
+			pManager->refPoint.y = y;
+			pManager->GetOutput()->ClearDrawArea();
+			pManager->UpdateInterface();
 		}
-		pManager->GetOutput()->ClearDrawArea();
-		pManager->UpdateInterface();
-		pManager->refPoint.x = x;// for moving more than once in one action
-		pManager->refPoint.y = y;
+		else 
+			pManager->UpdateInterface();
+		xold = x;
+		yold = y;
+
 	}
 	refPoint = pManager->refPoint;
 	pManager->GetOutput()->PrintMessage("moving finished");

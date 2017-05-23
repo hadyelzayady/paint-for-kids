@@ -14,7 +14,8 @@ public:
 	Input(window *pW);		//Consturctor
 	clicktype GetPointClicked(int &x, int &y) const;//Get coordinate where user clicks
 	string GetSrting(Output* pO) const ;	 //Returns a string entered by the user
-
+	buttonstate GetButtonState(int &x, int&y);
+	clicktype GetMouseFromBuffer(int&x,int&y);
 	ActionType GetUserAction() const; //Read the user click and map to an action
 
 	~Input();

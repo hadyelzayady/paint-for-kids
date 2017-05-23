@@ -12,6 +12,7 @@ clicktype Input::GetPointClicked(int &x, int &y) const
 	return	pWind->WaitMouseClick(x, y);	//Wait for mouse click
 }
 
+
 string Input::GetSrting(Output *pO) const 
 {
 	string Label;
@@ -29,6 +30,16 @@ string Input::GetSrting(Output *pO) const
 			Label+= Key;
 		pO->PrintMessage(Label);
 	}
+}
+
+buttonstate Input::GetButtonState(int & x, int & y)
+{
+	return pWind->GetButtonState(LEFT_BUTTON,x,y);
+}
+
+clicktype Input::GetMouseFromBuffer(int & x, int & y)
+{
+	return pWind->GetMouseClick(x,y);
 }
 
 //This function reads the position where the user clicks to determine the desired action
