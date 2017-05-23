@@ -13,7 +13,7 @@ void FillingAct::ReadActionParameters()
 
 
 }
-void FillingAct::changeAllSelected() const
+void FillingAct::changeAllSelected() 
 {
 	CFigure** FigList = pManager->getFigList();
 	size_t count = pManager->getFigCount();
@@ -21,6 +21,8 @@ void FillingAct::changeAllSelected() const
 	{
 		if (FigList[i]->IsSelected())
 		{
+			ChangedList.push_back(FigList[i]);
+			isFilledList.push_back(FigList[i]->getGfxInfo().isFilled);
 			FigList[i]->chngIsFilled(pManager->isFilled);
 		}
 
@@ -30,7 +32,7 @@ void FillingAct::changeAllSelected() const
 //Execute the action
 void FillingAct::Execute()
 {
-	pManager->isFilled = !(pManager->isFilled);
+	oldisFilled=pManager->isFilled = !(pManager->isFilled);
 	//activate toolbar image
 	if (pManager->isFilled)
 		pManager->GetOutput()->drawImg(UI.MenuItemWidth*ITM_FILL, 0,UI.MenuItemWidth, UI.ToolBarHeight, "images\\MenuItems\\Fill.jpg");
@@ -41,8 +43,16 @@ void FillingAct::Execute()
 
 void FillingAct::Undo()
 {
+	for (size_t i = 0; i < ChangedList.size(); i++)
+	{
+		ChangedList[i]->chngIsFilled(isFilledList[i]);
+	}
 }
 
 void FillingAct::Redo()
 {
+	for (size_t i = 0; i < ChangedList.size(); i++)
+	{
+		ChangedList[i]->chngIsFilled(oldisFilled);
+	}
 }

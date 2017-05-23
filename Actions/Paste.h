@@ -2,10 +2,12 @@
 #define Paste_ACTION_H
 
 #include "Action.h"
-
+#include <vector>
+#include "../Figures/CFigure.h"
 //Add Rectangle Action class
 class Paste : public Action
 {
+	vector<CFigure*>mycopyList;
 public:
 	Paste(ApplicationManager *pApp);
 	//Reads rectangle parameters

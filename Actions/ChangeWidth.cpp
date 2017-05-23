@@ -9,7 +9,7 @@ void ChangeWidth::ReadActionParameters()
 {
 
 }
-bool ChangeWidth::changeAllSelected(int width) const
+bool ChangeWidth::changeAllSelected(int width) 
 {
 	CFigure** FigList = pManager->getFigList();
 	size_t count = pManager->getFigCount();
@@ -17,7 +17,11 @@ bool ChangeWidth::changeAllSelected(int width) const
 	for (i = 0; i < count; i++)
 	{
 		if (FigList[i]->IsSelected())
+		{
+			ChangedList.push_back(FigList[i]);
+			widths.push_back(FigList[i]->getGfxInfo().BorderWdth);
 			FigList[i]->chngBorderWidth(width);
+		}
 	}
 	return i == 0 ? false : true;
 }
@@ -31,14 +35,26 @@ void ChangeWidth::Execute()
 		return;
 	pManager->GetOutput()->PrintMessage("width changed");
 	if (!changeAllSelected(widthsWin.getWidth()))
+	{
 		UI.PenWidth = widthsWin.getWidth();
+		pManager->popAction();// changing width only for no figures selected does not need undo and redo
+	}
+	newwidth = widthsWin.getWidth();
 	widthsWin.closeRect();
 }
 
 void ChangeWidth::Undo()
 {
+	for (size_t i = 0; i < ChangedList.size(); i++)
+	{
+		ChangedList[i]->chngBorderWidth(widths[i]);
+	}
 }
 
 void ChangeWidth::Redo()
 {
+	for (size_t i = 0; i < ChangedList.size(); i++)
+	{
+		ChangedList[i]->chngBorderWidth(newwidth);
+	}
 }

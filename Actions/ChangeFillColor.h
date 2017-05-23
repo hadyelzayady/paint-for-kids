@@ -1,10 +1,15 @@
 #pragma once
 #include "Action.h"
 #include "ColorRectangle.h"
+#include <vector>
+#include "../Figures/CFigure.h"
 class ChangeFillColor : public Action
 {
 	ColorRectangle colorsWin;
 	bool filled;
+	vector<CFigure*>ChangedList;
+	vector<color>Fillcolors;
+	color newcolor;
 public:
 	ChangeFillColor(ApplicationManager* pApp);
 
@@ -13,7 +18,7 @@ public:
 
 	//Add Line to the ApplicationManager
 	virtual void Execute();
-	bool changeAllSelected(color c)const;
+	bool changeAllSelected(color c);
 	void Undo();
 	void Redo();
 	~ChangeFillColor();

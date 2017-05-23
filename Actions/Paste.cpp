@@ -26,6 +26,7 @@ void Paste::ReadActionParameters()
 			recover(i);
 			return;
 		}// move -> moves the figure center to newx,newy
+		mycopyList.push_back(newFig);
 		pManager->AddFigure(newFig);
 	}
 	pManager->GetOutput()->PrintMessage("Pasted");
@@ -53,8 +54,17 @@ void Paste::Execute()
 
 void Paste::Undo()
 {
+	int count = mycopyList.size();
+	for (size_t i = 0; i < count; i++)
+	{
+		pManager->removeFigFromList(mycopyList[i]);
+	}
 }
 
 void Paste::Redo()
 {
+	for (size_t i = 0; i < mycopyList.size(); i++)
+	{
+		pManager->AddFigure(mycopyList[i]);
+	}
 }

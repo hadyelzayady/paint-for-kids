@@ -1,17 +1,20 @@
 #pragma once
 #include "Action.h"
 #include "ColorRectangle.h"
+#include <vector>
+#include "../Figures/CFigure.h"
 class ChangeDrawColor : public Action
 {
 	ColorRectangle colorsWin;
-	color oldColor;
-	color ActColor;
+	color newColor;
+	vector<CFigure*>ChangedList;
+	vector<color> colorsList;
 public:
 	ChangeDrawColor(ApplicationManager* pApp);
 
 	//Reads Line parameters
 	virtual void ReadActionParameters();
-	int changeAllSelected(color c)const;
+	bool changeAllSelected(color c);
 	//Add Line to the ApplicationManager
 	virtual void Execute();
 	void Undo();

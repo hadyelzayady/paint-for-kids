@@ -46,6 +46,7 @@ class color {
 */
 
 const color SNOW = color(255, 250, 250);
+const color WHITERED = color(255, 128, 128);
 const color GHOSTWHITE = color(248, 248, 255);
 const color WHITESMOKE = color(245, 245, 245);
 const color GAINSBORO = color(220, 220, 220);
