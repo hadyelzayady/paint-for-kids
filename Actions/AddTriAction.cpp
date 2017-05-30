@@ -25,6 +25,7 @@ void AddTriAction:: ReadActionParameters()
 		{
 			pOut->PrintMessage("Action cancelled");
 			cancelAction = true;
+			pManager->destrList.push(pManager->popAction());
 			return;
 		}
 	}
@@ -39,6 +40,7 @@ void AddTriAction:: ReadActionParameters()
 		{
 			pOut->PrintMessage("Action cancelled");
 			cancelAction = true;
+			pManager->destrList.push(pManager->popAction());
 			return;
 		}
 	}
@@ -53,6 +55,7 @@ void AddTriAction:: ReadActionParameters()
 		{
 			pOut->PrintMessage("Action cancelled");
 			cancelAction = true;
+			pManager->destrList.push(pManager->popAction());
 			return;
 		}
 	}

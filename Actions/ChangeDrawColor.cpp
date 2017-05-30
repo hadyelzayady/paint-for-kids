@@ -8,22 +8,13 @@ void ChangeDrawColor::ReadActionParameters()
 {
 
 }
-bool ChangeDrawColor::changeAllSelected(color c) 
+void ChangeDrawColor::changeAllSelected() 
 {
-	CFigure** FigList = pManager->getFigList();
-	size_t count = pManager->getFigCount();
-	int numOfSelec = 0;
-	int i;
-	for (i = 0; i < count; i++)
+	for (int i = 0; i < ChangedList.size(); i++)
 	{
-		if (FigList[i]->IsSelected())
-		{
-			ChangedList.push_back(FigList[i]);
-			colorsList.push_back(FigList[i]->getGfxInfo().DrawClr);
-			FigList[i]->ChngDrawClr(c);
-		}
+		colorsList.push_back(ChangedList[i]->getGfxInfo().DrawClr);
+		ChangedList[i]->ChngDrawClr(newColor);
 	}
-	return i == 0 ? false : true;
 }
 void ChangeDrawColor::Execute()
 {
@@ -33,13 +24,14 @@ void ChangeDrawColor::Execute()
 	colorsWin.closeRect();
 	if (!isselected)
 		return;
-	color c = colorsWin.getcolor();
-	if(changeAllSelected(c)==0)
+	newColor = colorsWin.getcolor();
+	if(!pManager->getSelectedFigs(ChangedList))
 	{	
-		UI.DrawColor = c;
+		UI.DrawColor = newColor;
 		pManager->popAction();// changing width only for no figures selected does not need undo and redo
 	}
-	newColor = colorsWin.getcolor();
+	else 		
+		changeAllSelected();
 
 }
 

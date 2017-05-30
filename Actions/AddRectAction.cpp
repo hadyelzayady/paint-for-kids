@@ -26,6 +26,7 @@ void AddRectAction::ReadActionParameters()
 		{
 			pOut->PrintMessage("Action cancelled");
 			cancelAction = true;
+			pManager->destrList.push(pManager->popAction());
 			return;
 		}
 	}
@@ -39,6 +40,7 @@ void AddRectAction::ReadActionParameters()
 		{
 			pOut->PrintMessage("Action cancelled");
 			cancelAction = true;
+			pManager->destrList.push(pManager->popAction());
 			return;
 		}
 	}

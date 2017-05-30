@@ -22,12 +22,14 @@ private:
 	Output *pOut;
 	deque<Action*>actions;
 	stack<Action*> Redo;
-	vector<Action*>destrList;
 public:	
+	stack<Action*>destrList;
 	void pushAction(Action*ac);
 	Action* popAction();
+	void popDelAction();
+	void popActions();
 	Action* RedoTop();
-	void destruct(Action*ac);
+	//void destruct(Action*ac);
 	//stack<Action*>undoed;
 	bool isFilled;
 	ApplicationManager();
@@ -40,6 +42,8 @@ public:
 	{
 		return FigCount;
 	}
+	void SaveFig(ofstream& os);
+	bool getSelectedFigs(vector<CFigure*>&SelectedList);
 	CFigure** getFigList()
 	{
 		return FigList;

@@ -24,6 +24,7 @@ void Paste::ReadActionParameters()
 		{
 			pManager->GetOutput()->PrintMessage("invalid ,pasting cancelled");
 			recover(i);
+
 			return;
 		}// move -> moves the figure center to newx,newy
 		mycopyList.push_back(newFig);

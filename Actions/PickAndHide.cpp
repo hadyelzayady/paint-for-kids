@@ -70,7 +70,7 @@ void PickAndHide::ReadActionParameters()
 	int x, y;
 	//////////////////////choose host figure
 	do {
-		pOut->PrintMessage("Play Pick and Hide,select the host figure");
+	//	pOut->PrintMessage("Play Pick and Hide,select the host figure");
 		pIn->GetPointClicked(x, y);
 		if (y < UI.ToolBarHeight)// click on toolbar
 			return;
@@ -200,9 +200,9 @@ void PickAndHide::createPropPallet()
 	Input* pIn = pManager->GetInput();
 	int x = UI.MenuItemWidth*PICKHIDE;
 	int y = UI.ToolBarHeight;
-	int width = 200;
-	int height = 50;
-	pOut->drawImg(x, y, width, height, "images\\MenuItems\\ResizeOptions.jpg");
+	int width = 800;
+	int height = 100;
+	pOut->drawImg(x, y, width, height, "images\\MenuItems\\PickOptions.jpg");
 	int clickX, clickY;
 	pIn->GetPointClicked(clickX, clickY);
 	// getting option
@@ -210,7 +210,7 @@ void PickAndHide::createPropPallet()
 	if (clickY >UI.ToolBarHeight && clickY<y + height)
 	{
 		int relativeDistance = clickX - x;// distance from most left of the resize image
-		index = relativeDistance / 50;//50 is the width of resize option ; .25->50 px ...
+		index = relativeDistance / (width/4);//50 is the width of resize option ; .25->50 px ...
 	}
 	//close pallete
 	pOut->ClearDrawArea();
@@ -218,6 +218,7 @@ void PickAndHide::createPropPallet()
 	if (index >= 4 || index == -1)
 		return;
 	PropType = options[index];
+	pOut->PrintNumber(PropType);
 	ReadActionParameters();
 }
 
@@ -225,6 +226,7 @@ void PickAndHide::createPropPallet()
 
 void PickAndHide::hideFig(int x,int y)
 {
+	pManager->destrList.push(pManager->popAction());
 	size_t FigCount = pManager->getFigCount();
 	CFigure**FigList = pManager->getFigList();
 	for (size_t i = 0; i < FigCount; i++)

@@ -59,6 +59,7 @@ void SelectAction::ReadActionParameters()
 void SelectAction::Execute()
 {
 	//This action needs to read some parameters first
+	pManager->destrList.push(pManager->popAction());
 	ReadActionParameters();
 	// set ref point to use it in paste and move
 	int FigCount = pManager->getFigCount();

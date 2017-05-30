@@ -9,21 +9,13 @@ void ChangeWidth::ReadActionParameters()
 {
 
 }
-bool ChangeWidth::changeAllSelected(int width) 
+void ChangeWidth::changeAllSelected() 
 {
-	CFigure** FigList = pManager->getFigList();
-	size_t count = pManager->getFigCount();
-	size_t i;
-	for (i = 0; i < count; i++)
+	for (int i = 0; i < ChangedList.size(); i++)
 	{
-		if (FigList[i]->IsSelected())
-		{
-			ChangedList.push_back(FigList[i]);
-			widths.push_back(FigList[i]->getGfxInfo().BorderWdth);
-			FigList[i]->chngBorderWidth(width);
-		}
+		widths.push_back(ChangedList[i]->getGfxInfo().BorderWdth);
+		ChangedList[i]->chngBorderWidth(newwidth);
 	}
-	return i == 0 ? false : true;
 }
 void ChangeWidth::Execute()
 {
@@ -32,15 +24,20 @@ void ChangeWidth::Execute()
 	bool isselected = widthsWin.selectWidth();
 	widthsWin.closeRect();
 	if (!isselected)
+	{
 		return;
+		pManager->destrList.push(pManager->popAction());
+	}
 	pManager->GetOutput()->PrintMessage("width changed");
-	if (!changeAllSelected(widthsWin.getWidth()))
+	newwidth = widthsWin.getWidth();
+	if (!pManager->getSelectedFigs(ChangedList))
 	{
 		UI.PenWidth = widthsWin.getWidth();
 		pManager->popAction();// changing width only for no figures selected does not need undo and redo
 	}
-	newwidth = widthsWin.getWidth();
-	widthsWin.closeRect();
+	else
+		changeAllSelected();
+
 }
 
 void ChangeWidth::Undo()

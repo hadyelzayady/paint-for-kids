@@ -24,6 +24,7 @@ void AddLineAction::ReadActionParameters()
 		if (pIn->GetPointClicked(P1.x, P1.y) == RIGHT_CLICK)
 		{
 			pOut->PrintMessage("Action cancelled");
+			pManager->destrList.push(pManager->popAction());
 			cancelAction = true;
 			return;
 		}
@@ -39,7 +40,7 @@ void AddLineAction::ReadActionParameters()
 		{
 			pOut->PrintMessage("Action cancelled");
 			cancelAction = true;
-			pManager->popAction();
+			pManager->destrList.push(pManager->popAction());
 			return;
 		}
 	}

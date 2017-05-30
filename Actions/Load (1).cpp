@@ -25,7 +25,6 @@ void Load::ReadActionParameters()
 //Execute the action
 void Load::Execute()
 {
-	pManager->popAction();
 	ReadActionParameters();
 	ifstream file(filename);
 	if(!file.good()){

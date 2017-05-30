@@ -14,7 +14,7 @@ public:
 
 	//Reads Line parameters
 	virtual void ReadActionParameters();
-	bool changeAllSelected(color c);
+	void changeAllSelected();
 	//Add Line to the ApplicationManager
 	virtual void Execute();
 	void Undo();

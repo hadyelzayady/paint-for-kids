@@ -36,6 +36,7 @@ void AddCircAction::ReadActionParameters()
 		{
 			pOut->PrintMessage("Action cancelled");
 			cancelAction = true;
+			pManager->destrList.push(pManager->popAction());
 			return;
 		}
 		Rad = (int)sqrt(pow(Center.x - P1.x, 2) + pow(Center.y - P1.y, 2));

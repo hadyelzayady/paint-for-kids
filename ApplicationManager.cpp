@@ -44,6 +44,29 @@ Action* ApplicationManager::popAction()
 	return NULL;
 
 }
+void ApplicationManager::popDelAction()
+{
+	if (!destrList.empty())
+	{
+		delete destrList.top();
+		destrList.pop();
+	}
+}
+void ApplicationManager::popActions()
+{
+	for (size_t i = 0; i < actions.size(); i++)
+	{
+		delete actions[i];
+	}
+	actions.clear();
+	for (size_t i = 0; i < Redo.size(); i++)
+	{
+		delete Redo.top();
+		Redo.pop();
+	}
+
+	
+}
 Action * ApplicationManager::RedoTop()
 {
 	if (!Redo.empty())
@@ -53,13 +76,6 @@ Action * ApplicationManager::RedoTop()
 		return ac;
 	}
 	return NULL;
-}
-void ApplicationManager::destruct(Action * ac)
-{
-	for (size_t i = 0; i < destrList.size(); i++)
-	{
-		delete destrList.at(i);
-	}
 }
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -83,6 +99,7 @@ ActionType ApplicationManager::GetUserAction() const
 	//Ask the input to get the action from the user.
 	return pIn->GetUserAction();		
 }
+
 ////////////////////////////////////////////////////////////////////////////////////
 //Creates an action and executes it
 void ApplicationManager::ExecuteAction(ActionType ActType) 
@@ -151,6 +168,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			break;
 		case LOAD:
 			unselectAll();
+			popActions();
 			pAct = new Load(this);
 			break;
 		case UNDO:
@@ -189,9 +207,6 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case PLAY_PICK_HIDE:
 			pAct = new PickAndHide(this);
 			break;
-		case PLAY_SCAMBLE_FIND:
-			pAct = new Scramble(this);
-			break;
 		case TO_DRAW:
 		{
 			pOut->PrintMessage("Draw Mode");
@@ -208,11 +223,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	//Execute the created action
 	if(pAct != NULL)
 	{
-		if (!dynamic_cast<Save*>(pAct) && !dynamic_cast<Load*>(pAct) && !dynamic_cast<SelectAction*>(pAct))// push first to be able to pop the action f it is cancelled
-			pushAction(pAct);
+		pushAction(pAct);
 		pAct->Execute();//Execute// if exectute return true then action works well
-		if (dynamic_cast<Save*>(pAct) || dynamic_cast<Load*>(pAct) || dynamic_cast<SelectAction*>(pAct))
-			delete pAct;
+		popDelAction();//to delete cancelled actions
 		pAct = NULL;
 	}
 }
@@ -361,4 +374,27 @@ ApplicationManager::~ApplicationManager()
 		delete Redo.top();
 		Redo.pop();
 	}
+}
+
+void ApplicationManager::SaveFig(ofstream & os)
+{
+	for (size_t i = 0; i < FigCount; i++)
+	{
+		FigList[i]->Save(os);
+	}
+}
+
+
+bool ApplicationManager::getSelectedFigs(vector<CFigure*>& SelectedList)
+{
+	int i;
+	for (i = 0; i < FigCount; i++)
+	{
+		if (FigList[i]->IsSelected())
+		{
+			SelectedList.push_back(FigList[i]);
+		}
+
+	}
+	return i == 0 ? false : true;
 }

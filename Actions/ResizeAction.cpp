@@ -13,20 +13,15 @@ void ResizeAction::changeAllSelected()
 	pManager->GetOutput()->PrintMessage("resize");
 	CFigure** FigList = pManager->getFigList();
 	int FigCount = pManager->getFigCount();
-	for (int i = 0; i < FigCount; i++)
+	for (int i = 0; i < ResizedList.size(); i++)
 	{
-		if (FigList[i]->IsSelected())
+		if (!ResizedList[i]->Resize(resize))
 		{
-			ResizedList.push_back(FigList[i]);
-			if (!FigList[i]->Resize(resize))
-			{
-				Undo();
-				pManager->GetOutput()->PrintMessage("beyond boundries");
-				//pManager->destruct(pManager->popAction());
-				break;
-			}
+			Undo();
+			pManager->GetOutput()->PrintMessage("beyond boundries");
+			//pManager->destruct(pManager->popAction());
+			break;
 		}
-
 	}
 	pManager->GetOutput()->ClearDrawArea();
 	
@@ -54,6 +49,7 @@ void ResizeAction::CreateResizePallete()
 
 	if (index >= 4 || index == -1)
 		return;
+	pManager->getSelectedFigs(ResizedList);
 	resize = options[index];
 	changeAllSelected();
 

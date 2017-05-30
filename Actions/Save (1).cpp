@@ -22,7 +22,6 @@ void Save::ReadActionParameters()
 //Execute the action
 void Save::Execute()
 {
-	pManager->destrList.push(pManager->popAction());
 	ReadActionParameters();
 	size_t Count=pManager->getFigCount();
 	ofstream file;
@@ -33,5 +32,8 @@ void Save::Execute()
 	int fillcolorindex = pManager->getcolorIndex(pOut->getCrntFillColor());
 	int bgrcolorindex = pManager->getcolorIndex(UI.BkGrndColor);
 	file << drawcolorindex <<setw(8)<<fillcolorindex<<setw(8)<<bgrcolorindex<<endl<<pManager->getFigCount()<<endl;
-	pManager->SaveFig(file);
+	for (size_t i = 0; i < Count; i++)
+	{
+		FigList[i]->Save(file);
+	}
 }

@@ -15,18 +15,12 @@ void Move::ReadActionParameters()
 	oldrefPoint = pManager->refPoint;
 	int x, y;
 	//get selected Fig
-	for (size_t i = 0; i < FigCount; i++)
-	{
-		if (FigList[i]->IsSelected())
-		{
-			MovedFig.push_back(FigList[i]);
-		}
-	}
+	pManager->getSelectedFigs(MovedFig);
 	//
 	while (pManager->GetInput()->GetButtonState(x, y) == BUTTON_UP) {
 		if (pManager->GetInput()->GetMouseFromBuffer(x, y) == RIGHT_CLICK)//action cancelled
 		{
-			pManager->popAction();
+			pManager->destrList.push(pManager->popAction());
 			return;
 		}
 	}
